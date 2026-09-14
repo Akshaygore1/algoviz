@@ -14,11 +14,10 @@ export default defineConfig(
   },
   {
     files: [
-      "src/components/app/ThemeToggle.tsx",
+      "src/components/layout/ThemeToggle.tsx",
       "src/components/ui/carousel.tsx",
-      "src/hooks/use-mobile.tsx",
-      "src/lib/progress.ts",
-      "src/lib/viz/useStepPlayer.ts",
+      "src/hooks/use-mobile.ts",
+      "src/hooks/use-step-player.ts",
     ],
     rules: { "react-hooks/set-state-in-effect": "off" },
   },

@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 .next
+*.tsbuildinfo
 *.local
 
 # Editor directories and files

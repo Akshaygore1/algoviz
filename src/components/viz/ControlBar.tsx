@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { SPEEDS, type Speed } from "@/lib/viz/useStepPlayer";
+import { SPEEDS, type Speed } from "@/hooks/use-step-player";
 import { cn } from "@/lib/utils";
 
 interface Props {

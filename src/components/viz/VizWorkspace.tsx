@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { AlgorithmDefinition, AlgorithmStep } from "@/lib/viz/types";
-import { useStepPlayer } from "@/lib/viz/useStepPlayer";
+import { useStepPlayer } from "@/hooks/use-step-player";
 import { CodePanel } from "./CodePanel";
 import { ControlBar } from "./ControlBar";
 import { ExplanationPanel } from "./ExplanationPanel";
