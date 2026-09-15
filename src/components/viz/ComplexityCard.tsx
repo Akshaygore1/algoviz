@@ -1,50 +1,35 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { ComplexityInfo } from "@/lib/viz/types";
 
-const GROWTH: Record<string, number> = {
-  "O(1)": 4,
-  "O(log n)": 14,
-  "O(n)": 40,
-  "O(n log n)": 62,
-  "O(n²)": 85,
-  "O(2ⁿ)": 100,
-};
-
-function Bar({ label, value }: { label: string; value: string }) {
-  const pct = GROWTH[value] ?? 50;
+function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="space-y-1.5">
-      <div className="flex items-center justify-between text-xs">
-        <span className="text-muted-foreground">{label}</span>
-        <span className="font-mono font-medium">{value}</span>
-      </div>
-      <div className="h-1.5 overflow-hidden rounded-full bg-muted">
-        <div
-          className="h-full rounded-full bg-primary transition-all duration-500"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
+    <div className="py-3">
+      <dt className="text-[11px] tracking-wide text-muted-foreground">{label}</dt>
+      <dd className="mt-1 font-mono text-sm font-medium tabular-nums">{value}</dd>
     </div>
   );
 }
 
 export function ComplexityCard({ complexity }: { complexity: ComplexityInfo }) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-base">Complexity</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid gap-3 sm:grid-cols-2">
-          <Bar label="Time (best)" value={complexity.timeBest} />
-          <Bar label="Time (average)" value={complexity.timeAverage} />
-          <Bar label="Time (worst)" value={complexity.timeWorst} />
-          <Bar label="Space" value={complexity.space} />
-        </div>
-        <p className="border-t border-border pt-3 text-sm leading-relaxed text-muted-foreground">
-          {complexity.plainEnglish}
-        </p>
-      </CardContent>
-    </Card>
+    <section aria-labelledby="complexity-heading" className="pt-2">
+      <h2 id="complexity-heading" className="text-sm font-medium">
+        Complexity
+      </h2>
+      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+        These metrics show how the algorithm scales as input grows: time measures work; space
+        measures extra memory.
+      </p>
+
+      <dl className="mt-3 grid grid-cols-2 gap-x-6 gap-y-0 sm:grid-cols-4">
+        <Metric label="Time — best" value={complexity.timeBest} />
+        <Metric label="Time — avg" value={complexity.timeAverage} />
+        <Metric label="Time — worst" value={complexity.timeWorst} />
+        <Metric label="Space" value={complexity.space} />
+      </dl>
+
+      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+        {complexity.plainEnglish}
+      </p>
+    </section>
   );
 }

@@ -28,7 +28,7 @@ export function AppShell({ children }: Props) {
           </nav>
         </div>
       </header>
-      <main className="min-w-0 flex-1">{children}</main>
+      <main className="mx-auto w-full min-w-0 max-w-4xl flex-1">{children}</main>
     </div>
   );
 }

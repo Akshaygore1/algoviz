@@ -18,7 +18,7 @@ export function CodePanel({ code, language, highlighted }: Props) {
         <span className="font-mono text-[11px] text-muted-foreground">{language}</span>
       </header>
       <div className="min-h-0 flex-1 overflow-auto py-2">
-        <pre className="font-mono text-xs leading-6 sm:text-[13px]">
+        <pre className="font-mono text-xs leading-5">
           {code.map((line, i) => {
             const active = highlighted.includes(i + 1);
             return (

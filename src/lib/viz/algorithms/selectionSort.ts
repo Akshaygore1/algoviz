@@ -182,7 +182,7 @@ export const selectionSort: AlgorithmDefinition<ArrayVizState, number[]> = {
     timeWorst: "O(n²)",
     space: "O(1)",
     plainEnglish:
-      "Every pass scans the entire unsorted region, so the comparison count is always about n²/2: the input order never helps. The upside is at most n − 1 swaps, the fewest writes of any simple sort. It sorts in place, so extra memory is constant.",
+      "Each pass scans the entire unsorted portion to find its minimum. These scans add up to about n²/2 comparisons, so the best, average, and worst-case time are all O(n²) even for an already sorted array. It stores only a few variables, so extra space is O(1), and it performs at most n − 1 swaps to keep writes low.",
   },
   generate,
 };
