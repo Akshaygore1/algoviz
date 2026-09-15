@@ -28,25 +28,8 @@ const steps = [
 function Home() {
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-20 border-b border-border bg-background/85 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary font-mono text-xs font-bold text-primary-foreground">
-              DS
-            </span>
-            <span className="text-sm font-semibold tracking-tight">DSA Visualizer</span>
-          </Link>
-          <nav className="ml-auto hidden items-center gap-1 sm:flex">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/visualizers">Visualizers</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/patterns">Patterns</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/roadmap">Roadmap</Link>
-            </Button>
-          </nav>
+      <header className="sticky top-0 z-20 bg-background/85 backdrop-blur">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-end">
           <ThemeToggle />
         </div>
       </header>

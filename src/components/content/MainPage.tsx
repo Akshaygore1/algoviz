@@ -1,4 +1,4 @@
-import type { LucideIcon } from "lucide-react";
+import { ArrowLeft, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 
@@ -16,14 +16,27 @@ type MainPageProps = {
 
 /** A consistent, navigable card grid for top-level app pages. */
 export function MainPage({ title, cards, breadcrumb = title }: MainPageProps) {
+  const isHome = breadcrumb === "Home";
+
   return (
     <AppShell breadcrumb={breadcrumb}>
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
-        <div className="flex items-center justify-center">
-          <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
-        </div>
+      <header className="mx-auto flex w-full max-w-300 flex-col items-center px-5 py-10 sm:min-h-44 sm:px-8 lg:px-10">
+        <h1 className="text-center text-xl font-medium tracking-tight text-foreground sm:text-[1.375rem]">
+          {title}
+        </h1>
+        {!isHome && (
+          <Link
+            href="/home"
+            aria-label="Back to home"
+            className="mt-8 inline-flex size-8 self-start items-center justify-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <ArrowLeft aria-hidden="true" className="size-4" />
+          </Link>
+        )}
+      </header>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="mx-auto w-full max-w-300 px-4 pt-10 pb-16 sm:pt-12 sm:pb-20">
+        <div className="mt-8 grid grid-cols-2 gap-2.5 lg:grid-cols-3">
           {cards.map((card) => {
             const Icon = card.icon;
 
@@ -31,10 +44,15 @@ export function MainPage({ title, cards, breadcrumb = title }: MainPageProps) {
               <Link
                 key={card.href}
                 href={card.href}
-                className="group relative flex min-h-16 items-center gap-3 overflow-hidden rounded-xl border border-black bg-card p-4 outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="group relative flex items-center justify-center gap-2.5 rounded-lg bg-card px-3.5 py-2.5 outline-none"
               >
-                <Icon aria-hidden="true" className="h-6 w-6 shrink-0 stroke-[1.6]" />
-                <h2 className="text-base font-semibold tracking-tight sm:text-lg">{card.title}</h2>
+                <Icon
+                  aria-hidden="true"
+                  className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground"
+                />
+                <span className="text-lg font-medium tracking-tight text-foreground">
+                  {card.title}
+                </span>
               </Link>
             );
           })}

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "./AppSidebar";
+import Link from "next/link";
+import { CircleDot } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 interface Props {
@@ -9,25 +9,26 @@ interface Props {
   actions?: ReactNode;
 }
 
-export function AppShell({ children, breadcrumb, actions }: Props) {
+export function AppShell({ children }: Props) {
   return (
-    <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-background">
-        <AppSidebar />
-        <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-20 flex h-12 items-center gap-2 border-b border-border bg-background/85 px-2 backdrop-blur">
-            <SidebarTrigger />
-            {breadcrumb && (
-              <span className="truncate text-sm text-muted-foreground">{breadcrumb}</span>
-            )}
-            <div className="ml-auto flex items-center gap-1">
-              {actions}
-              <ThemeToggle />
-            </div>
-          </header>
-          <main className="min-w-0 flex-1">{children}</main>
+    <div className="flex min-h-screen w-full flex-col bg-background">
+      <header className="sticky top-0 z-20 border-b border-transparent bg-background/90 backdrop-blur-md">
+        <div className="mx-auto flex h-16 w-full max-w-360 items-center px-5 sm:px-8 lg:px-10">
+          <Link
+            href="/home"
+            className="flex items-center gap-1.5 rounded-sm text-sm font-semibold tracking-[-0.02em] outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+            aria-label="AlgoViz home"
+          >
+            <CircleDot aria-hidden="true" className="size-4 stroke-[1.8]" />
+            <span>algoviz</span>
+          </Link>
+
+          <nav aria-label="Primary navigation" className="ml-auto flex items-center gap-1 sm:gap-2">
+            <ThemeToggle />
+          </nav>
         </div>
-      </div>
-    </SidebarProvider>
+      </header>
+      <main className="min-w-0 flex-1">{children}</main>
+    </div>
   );
 }

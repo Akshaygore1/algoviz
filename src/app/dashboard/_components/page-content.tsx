@@ -28,23 +28,21 @@ function Dashboard() {
   const nextUp = ranked.find((t) => t.href);
 
   return (
-    <AppShell
-      breadcrumb="Dashboard"
-      actions={
-        progress.hydrated && progress.visits.length > 0 ? (
-          <Button variant="ghost" size="sm" onClick={progress.reset}>
-            <RotateCcw className="h-4 w-4" />
-            Reset progress
-          </Button>
-        ) : null
-      }
-    >
+    <AppShell>
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-        <header>
-          <h1 className="text-3xl font-semibold tracking-tight">Dashboard</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Your progress is saved in this browser.
-          </p>
+        <header className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-semibold tracking-tight">Dashboard</h1>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Your progress is saved in this browser.
+            </p>
+          </div>
+          {progress.hydrated && progress.visits.length > 0 ? (
+            <Button variant="ghost" size="sm" onClick={progress.reset}>
+              <RotateCcw data-icon="inline-start" />
+              Reset progress
+            </Button>
+          ) : null}
         </header>
 
         <div className="mt-8 grid divide-y border-y border-border py-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-6">
