@@ -11,8 +11,8 @@ export default SelectionSortPage;
 function SelectionSortPage() {
   return (
     <AppShell breadcrumb="Algorithms / Sorting / Selection Sort">
-      <div className="mx-auto space-y-8 px-4 py-8 sm:px-6">
-        <header className="space-y-3">
+      <div className="mx-auto px-6 pt-6 pb-16">
+        <header className="max-w-3xl">
           <PageBreadcrumb
             items={[
               { label: "Algorithms", href: "/algorithms" },
@@ -20,8 +20,10 @@ function SelectionSortPage() {
               { label: "Selection Sort" },
             ]}
           />
-          <h1 className="text-2xl font-semibold tracking-tight py-4">{selectionSort.title}</h1>
-          <div className="space-y-2 text-sm leading-relaxed text-muted-foreground">
+          <h1 className="mt-6 text-lg leading-8.5 font-semibold tracking-[-0.04em] text-balance sm:text-4xl sm:leading-10">
+            {selectionSort.title}
+          </h1>
+          <div className="mt-5 max-w-[70ch] space-y-5 text-[17px] leading-6.75 text-muted-foreground">
             <p>{selectionSort.tagline}</p>
             <p>
               Run the already sorted preset and watch the comparison counter: it does not drop at
@@ -31,26 +33,41 @@ function SelectionSortPage() {
           </div>
         </header>
 
-        <SortVisualizer definition={selectionSort} />
-
-        <ComplexityCard complexity={selectionSort.complexity} />
-
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-xl border border-border bg-card p-6">
-            <h2 className="text-base font-semibold">In place, not stable</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              It sorts in place with O(1) extra space. It is not stable — swapping the smallest
-              value into place can move equal values past each other.
-            </p>
-          </div>
-          <div className="rounded-xl border border-border bg-card p-6">
-            <h2 className="text-base font-semibold">When to use it</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Rarely asked to code. Useful when writes are expensive — it does at most n − 1 swaps,
-              the fewest of any simple sort.
-            </p>
-          </div>
+        <div className="mt-10">
+          <SortVisualizer definition={selectionSort} />
         </div>
+
+        <ComplexityCard
+          complexity={selectionSort.complexity}
+          articleScale
+          className="mt-9 max-w-3xl pt-0"
+        />
+
+        <section aria-labelledby="characteristics-heading" className="mt-9 max-w-3xl">
+          <h2
+            id="characteristics-heading"
+            className="text-xl leading-[26px] font-semibold tracking-[-0.02em] sm:text-2xl sm:leading-8 sm:tracking-[-0.04em]"
+          >
+            Characteristics
+          </h2>
+
+          <dl className="mt-3">
+            <div className="py-3">
+              <dt className="text-[17px] leading-[27px] font-semibold">In place, not stable</dt>
+              <dd className="mt-3 text-[17px] leading-[27px] text-muted-foreground">
+                It sorts in place with O(1) extra space. It is not stable. Swapping the smallest
+                value into place can move equal values past each other.
+              </dd>
+            </div>
+            <div className="mt-2 py-3">
+              <dt className="text-[17px] leading-[27px] font-semibold">When to use it</dt>
+              <dd className="mt-3 text-[17px] leading-[27px] text-muted-foreground">
+                Rarely asked to code. Useful when writes are expensive. It does at most n − 1 swaps,
+                the fewest of any simple sort.
+              </dd>
+            </div>
+          </dl>
+        </section>
       </div>
     </AppShell>
   );

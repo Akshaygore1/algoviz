@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { BubbleSortVisualizer } from "@/components/viz/BubbleSortVisualizer";
 import { ComplexityCard } from "@/components/viz/ComplexityCard";
 import { bubbleSort } from "@/lib/viz/algorithms/bubbleSort";
@@ -32,18 +30,17 @@ function BubbleSortPage() {
 
         <ComplexityCard complexity={bubbleSort.complexity} />
 
-        <div className="rounded-xl border border-border bg-card p-6">
-          <h2 className="text-base font-semibold">Where this shows up in interviews</h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        <section aria-labelledby="interviews-heading" className="pt-2">
+          <h2 id="interviews-heading" className="text-base font-semibold">
+            Where this shows up in interviews
+          </h2>
+          <p className="mt-3 text-[15px] font-medium leading-relaxed text-muted-foreground">
             Nobody will ask you to write bubble sort to impress them; they ask it to check whether
             you can reason about nested loops and complexity. The valuable takeaway is the
             comparison count: it grows with n², which is exactly the cost you are trying to avoid in
             array questions by reaching for hashing, two pointers or a sliding window.
           </p>
-          <Button variant="outline" size="sm" className="mt-4" asChild>
-            <Link href="/learn/arrays">Learn arrays →</Link>
-          </Button>
-        </div>
+        </section>
       </div>
     </AppShell>
   );

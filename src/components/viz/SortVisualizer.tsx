@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, Dices } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Dices } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useStepPlayer } from "@/hooks/use-step-player";
-import type { AlgorithmDefinition, ArrayVizState, StepType } from "@/lib/viz/types";
+import type { AlgorithmDefinition, ArrayVizState } from "@/lib/viz/types";
 import { CodePanel } from "./CodePanel";
 import { ExplanationPanel } from "./ExplanationPanel";
 import { SortCanvas } from "./SortCanvas";
@@ -32,18 +31,6 @@ interface Props {
   presets?: Preset[];
   maxLength?: number;
 }
-
-const TYPE_LABEL: Record<StepType, string> = {
-  compare: "Compare",
-  swap: "Swap",
-  visit: "Visit",
-  insert: "Insert",
-  delete: "Delete",
-  highlight: "Setup",
-  update: "Update",
-  eliminate: "Eliminate",
-  complete: "Done",
-};
 
 function shortPresetLabel(label: string) {
   const l = label.toLowerCase();
@@ -81,20 +68,6 @@ export function SortVisualizer({
       <div className="grid lg:grid-cols-[1.65fr_0.95fr]">
         {/* Canvas */}
         <div className="flex min-h-[360px] flex-col bg-viz-surface lg:min-h-[440px] lg:border-r lg:border-border">
-          {/* Stage header */}
-          <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-card/40 px-3 py-2 sm:px-4">
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-viz-success" aria-hidden />
-              <span className="text-xs font-medium tracking-tight">Sorting stage</span>
-            </div>
-            <Badge
-              variant="secondary"
-              className="rounded-full border border-border bg-card font-mono text-[11px] font-medium"
-            >
-              {TYPE_LABEL[step.type]} · {player.index + 1}/{player.total}
-            </Badge>
-          </div>
-
           <div className="flex flex-1 flex-col">
             <SortCanvas state={step.state} />
           </div>
@@ -228,10 +201,6 @@ function SortDatasetToolbar({
               aria-invalid={!!error}
               aria-describedby={error ? "sort-dataset-error" : undefined}
             />
-            <Button onClick={apply} size="sm" className="h-8 shrink-0 gap-1.5">
-              Apply
-              <ArrowRight className="h-3.5 w-3.5" aria-hidden />
-            </Button>
           </div>
         </div>
 
@@ -278,7 +247,7 @@ function SortDatasetToolbar({
             );
           })}
           <span className="ml-auto hidden font-mono text-[11px] text-muted-foreground sm:inline">
-            Enter or Apply to update
+            Press Enter to update
           </span>
         </div>
       )}

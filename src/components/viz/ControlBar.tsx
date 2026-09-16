@@ -10,9 +10,9 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
 import { SPEEDS, type Speed } from "@/hooks/use-step-player";
 import { cn } from "@/lib/utils";
+import { StepProgress } from "./StepProgress";
 
 interface Props {
   index: number;
@@ -106,14 +106,7 @@ export function ControlBar(p: Props) {
       </div>
 
       <div className="flex items-center gap-3">
-        <Slider
-          value={[p.index]}
-          min={0}
-          max={Math.max(0, p.total - 1)}
-          step={1}
-          onValueChange={(vals) => p.onScrub(vals[0] ?? 0)}
-          aria-label="Step timeline"
-        />
+        <StepProgress index={p.index} total={p.total} onScrub={p.onScrub} />
         <span className="shrink-0 font-mono text-xs text-muted-foreground">
           step {p.index + 1} / {p.total}
         </span>

@@ -27,7 +27,7 @@ export function ExplanationPanel<T>({
   return (
     <div className="flex h-full flex-col">
       <header className="flex items-center justify-between gap-2 border-b border-border px-4 py-2">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground">
           What&apos;s happening
         </h3>
         <Badge variant="secondary" className="font-mono text-[10px]">
@@ -35,7 +35,7 @@ export function ExplanationPanel<T>({
         </Badge>
       </header>
       <div className="min-h-0 flex-1 space-y-4 overflow-auto px-4 py-3">
-        <p aria-live="polite" className="text-sm leading-relaxed text-foreground">
+        <p aria-live="polite" className="text-sm leading-relaxed text-muted-foreground">
           {step.description}
         </p>
         <div>

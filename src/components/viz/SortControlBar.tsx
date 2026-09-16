@@ -9,8 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 import { SPEEDS, type Speed } from "@/hooks/use-step-player";
+import { StepProgress } from "./StepProgress";
 
 interface Props {
   index: number;
@@ -39,14 +39,13 @@ export function SortControlBar(p: Props) {
         <div className="order-2 flex items-center gap-0.5">
           <Button
             variant="ghost"
-            size="sm"
-            className="h-8 gap-1.5 px-2 text-muted-foreground hover:text-foreground"
+            size="icon"
+            className="h-8 w-8 text-muted-foreground hover:text-foreground"
             onClick={p.onRestart}
             disabled={p.atStart}
             aria-label="Restart"
           >
             <RotateCcw className="h-3.5 w-3.5" />
-            <span className="hidden min-[380px]:inline">Restart</span>
           </Button>
           <Button
             variant="ghost"
@@ -60,12 +59,11 @@ export function SortControlBar(p: Props) {
           </Button>
           <Button
             onClick={p.onToggle}
-            size="sm"
-            className="h-9 min-w-[70px] gap-1.5 px-3"
+            size="icon"
+            className="h-9 w-9"
             aria-label={p.playing ? "Pause" : "Play"}
           >
-            {p.playing ? <Pause /> : <Play />}
-            {p.playing ? "Pause" : "Play"}
+            {p.playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
           </Button>
           <Button
             variant="ghost"
@@ -79,14 +77,11 @@ export function SortControlBar(p: Props) {
           </Button>
         </div>
 
-        <Slider
-          value={[p.index]}
-          min={0}
-          max={Math.max(0, p.total - 1)}
-          step={1}
-          onValueChange={(values) => p.onScrub(values[0] ?? 0)}
-          aria-label="Step timeline"
-          className="order-1 w-full [&>span:first-child]:h-1 [&_[role=slider]]:h-3 [&_[role=slider]]:w-3 [&_[role=slider]]:border-0 [&_[role=slider]]:shadow-none sm:order-2 sm:flex-1"
+        <StepProgress
+          index={p.index}
+          total={p.total}
+          onScrub={p.onScrub}
+          className="order-1 w-full sm:order-2"
         />
 
         <div className="order-3 ml-auto flex items-center gap-1.5 font-mono text-xs tabular-nums">
