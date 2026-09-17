@@ -1,4 +1,3 @@
-import { ArrowRight, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
@@ -6,7 +5,6 @@ import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 export type MainPageCard = {
   href: string;
   title: string;
-  icon: LucideIcon;
 };
 
 type MainPageProps = {
@@ -38,10 +36,6 @@ export function MainPage({ title, cards, breadcrumb = title }: MainPageProps) {
                 <span className="text-[17px] font-semibold tracking-[-0.02em] text-foreground">
                   {card.title}
                 </span>
-                <ArrowRight
-                  aria-hidden="true"
-                  className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5"
-                />
               </Link>
             );
           })}

@@ -8,7 +8,6 @@ export default BinarySearchProblemsPage;
 function BinarySearchProblemsPage() {
   return (
     <ProblemCategoryPage
-      breadcrumb="Interview prep / Problems / Binary Search"
       title="Binary Search"
       intro="Seven problems that all halve something. Sometimes the sorted thing is the input, sometimes it is a flattened grid, and sometimes it is the range of possible answers, but the move is always the same: one test, half the candidates gone."
       recognise="Binary search applies whenever a yes/no test flips exactly once as the candidate grows. If the input is sorted, search the input. If the answer has a 'does this value work?' test that only gets easier as the value grows, search the answer."

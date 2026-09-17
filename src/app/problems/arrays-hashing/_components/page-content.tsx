@@ -8,7 +8,6 @@ export default ArraysHashingPage;
 function ArraysHashingPage() {
   return (
     <ProblemCategoryPage
-      breadcrumb="Interview prep / Problems / Arrays & Hashing"
       title="Arrays & Hashing"
       intro="Nine problems that all rest on one idea: a hash map or set lets you ask 'have I seen this before?' for free, which removes the inner loop from a brute-force scan. Pick a problem, feed it your own input, and step through until the trade is obvious."
       recognise="You are looking at a hashing problem when the brute force is 'for each element, look through the rest', or when the question groups or counts things. Ask what you would need to remember to avoid re-scanning: a set for membership, a map for counts or indexes, a canonical key for grouping."

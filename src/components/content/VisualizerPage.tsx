@@ -7,14 +7,10 @@ import type { ComplexityInfo } from "@/lib/viz/types";
 interface Props {
   breadcrumb: string;
   breadcrumbs?: PageBreadcrumbItem[];
-  /** Retained temporarily so individual learning routes can migrate without visual metadata. */
-  badges?: string[];
   title: string;
   intro: string;
   children: ReactNode;
   complexity?: ComplexityInfo;
-  /** Intentionally not rendered: interview callouts were removed from the product surface. */
-  interviewNote?: { heading: string; body: string; to?: string; linkLabel?: string };
 }
 
 const BREADCRUMB_LINKS: Record<string, string> = {

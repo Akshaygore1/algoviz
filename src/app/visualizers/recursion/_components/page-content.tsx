@@ -7,15 +7,8 @@ function RecursionPage() {
   return (
     <VisualizerPage
       breadcrumb="Algorithms / Recursion"
-      badges={["Algorithm", "Beginner → Intermediate", "O(n) → O(2ⁿ)"]}
       title="Recursion"
       intro="Recursion is confusing because two things happen at once: calls go down, and answers come back up. Here you can see both: the call stack on the left holds the calls that have started but not finished, and the tree on the right keeps every call that was ever made, with its answer once it returns. Run naive Fibonacci, then the memoized version with the same n, and compare the call counters."
-      interviewNote={{
-        heading: "What interviewers actually check",
-        body: "Three things, in order: does your recursion have a base case that is always reached, does every call work on a strictly smaller input, and can you name the time and space cost, including that the stack itself is space. If you can also spot that the same sub-problem is being solved twice, you have just derived memoization, which is where most dynamic programming answers start.",
-        to: "/patterns",
-        linkLabel: "See the DFS and DP patterns →",
-      }}
     >
       <RecursionVisualizer />
 

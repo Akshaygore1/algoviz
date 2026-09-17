@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 
@@ -57,10 +56,6 @@ export default function Home() {
                   {destination.description}
                 </span>
               </span>
-              <ArrowRight
-                aria-hidden="true"
-                className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5"
-              />
             </Link>
           ))}
         </nav>
@@ -69,7 +64,7 @@ export default function Home() {
           href="/roadmap"
           className="mt-8 inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
         >
-          Follow the learning roadmap <ArrowRight aria-hidden="true" className="size-3.5" />
+          Follow the learning roadmap
         </Link>
       </div>
     </AppShell>

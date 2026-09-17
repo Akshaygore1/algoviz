@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 
@@ -130,7 +129,6 @@ function VisualizersIndex() {
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="font-semibold tracking-tight">{v.title}</h2>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
                 </div>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">{v.body}</p>
               </div>

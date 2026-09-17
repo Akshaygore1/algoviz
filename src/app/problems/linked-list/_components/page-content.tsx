@@ -8,7 +8,6 @@ export default LinkedListProblemsPage;
 function LinkedListProblemsPage() {
   return (
     <ProblemCategoryPage
-      breadcrumb="Interview prep / Problems / Linked List"
       title="Linked List"
       intro="Eleven problems about arrows. There is no random access, so everything is done with a handful of cursors: one behind, one ahead, one moving twice as fast. Watch the arrows change and the tricks stop feeling like tricks."
       recognise="Two pointers a fixed distance apart turn 'from the end' into one pass. Slow and fast pointers find middles and loops. A dummy head removes every special case about the first node. And when order plus lookup are both needed, pair a map with a list."

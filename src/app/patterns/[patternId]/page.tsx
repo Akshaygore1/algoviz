@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
@@ -102,7 +101,7 @@ export default async function PatternPage({ params }: Props) {
               href="/problems"
               className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
             >
-              Explore visualized problems <ArrowRight aria-hidden="true" className="size-3.5" />
+              Explore visualized problems
             </Link>
           </section>
         )}

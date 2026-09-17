@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { roadmap } from "@/data/roadmap";
@@ -34,10 +33,6 @@ export default function RoadmapPage() {
                         className="group flex items-center justify-between gap-4 py-3 text-sm font-medium outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
                       >
                         {topic.title}
-                        <ArrowRight
-                          aria-hidden="true"
-                          className="size-3.5 shrink-0 transition-transform group-hover:translate-x-0.5"
-                        />
                       </Link>
                     ) : (
                       <span className="block py-3 text-sm text-muted-foreground">

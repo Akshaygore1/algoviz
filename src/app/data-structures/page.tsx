@@ -1,13 +1,3 @@
-import {
-  Binary,
-  Braces,
-  ChartNoAxesColumnIncreasing,
-  GitBranch,
-  Layers,
-  Network,
-  Type,
-  Waypoints,
-} from "lucide-react";
 import { MainPage, type MainPageCard } from "@/components/content/MainPage";
 
 const TITLE = "Data Structures: DSA Visualizer";
@@ -21,14 +11,14 @@ export const metadata = {
 };
 
 const dataStructures: MainPageCard[] = [
-  { title: "Arrays", href: "/learn/arrays", icon: Braces },
-  { title: "Strings", href: "/visualizers/strings", icon: Type },
-  { title: "Linked Lists", href: "/visualizers/linked-list", icon: GitBranch },
-  { title: "Stacks", href: "/visualizers/stack", icon: Layers },
-  { title: "Queues", href: "/visualizers/queue", icon: Waypoints },
-  { title: "Hash Maps", href: "/visualizers/hashing", icon: ChartNoAxesColumnIncreasing },
-  { title: "Trees", href: "/visualizers/tree", icon: Network },
-  { title: "Heaps", href: "/visualizers/heap", icon: Binary },
+  { title: "Arrays", href: "/learn/arrays" },
+  { title: "Strings", href: "/visualizers/strings" },
+  { title: "Linked Lists", href: "/visualizers/linked-list" },
+  { title: "Stacks", href: "/visualizers/stack" },
+  { title: "Queues", href: "/visualizers/queue" },
+  { title: "Hash Maps", href: "/visualizers/hashing" },
+  { title: "Trees", href: "/visualizers/tree" },
+  { title: "Heaps", href: "/visualizers/heap" },
 ];
 
 export default function DataStructuresPage() {

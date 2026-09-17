@@ -1,20 +1,5 @@
-import {
-  Binary,
-  Braces,
-  ChartNoAxesColumnIncreasing,
-  CircleDot,
-  GitBranch,
-  Layers,
-  ListTree,
-  Map,
-  MoveHorizontal,
-  Network,
-  Search,
-  Sigma,
-  Waypoints,
-} from "lucide-react";
 import { MainPage, type MainPageCard } from "@/components/content/MainPage";
-import { patterns, type PatternId } from "@/data/patterns";
+import { patterns } from "@/data/patterns";
 
 const TITLE = "DSA Interview Patterns: Recognise Before You Code";
 const DESCRIPTION =
@@ -26,30 +11,9 @@ export const metadata = {
   openGraph: { title: TITLE, description: DESCRIPTION },
 };
 
-const patternIcons: Record<PatternId, MainPageCard["icon"]> = {
-  "hash-lookup": Map,
-  "frequency-map": ChartNoAxesColumnIncreasing,
-  "two-pointers": MoveHorizontal,
-  "sliding-window": Waypoints,
-  "binary-search": Binary,
-  "fast-slow": CircleDot,
-  "prefix-sum": Sigma,
-  "stack-matching": Layers,
-  "auxiliary-stack": Layers,
-  "monotonic-stack": ChartNoAxesColumnIncreasing,
-  "pointer-rewiring": GitBranch,
-  merge: MoveHorizontal,
-  bfs: Network,
-  "topological-sort": ListTree,
-  dfs: GitBranch,
-  "top-k": Search,
-  dp: Braces,
-};
-
 const patternCards: MainPageCard[] = patterns.map((pattern) => ({
   href: `/patterns/${pattern.id}`,
   title: pattern.name,
-  icon: patternIcons[pattern.id] ?? CircleDot,
 }));
 
 export default function Page() {

@@ -8,7 +8,6 @@ export default SlidingWindowPage;
 function SlidingWindowPage() {
   return (
     <ProblemCategoryPage
-      breadcrumb="Interview prep / Problems / Sliding Window"
       title="Sliding Window"
       intro="Six problems that all reuse one idea: instead of re-examining every substring or subarray, keep a single stretch of the input and adjust its edges. Because both edges only ever move forward, a quadratic scan collapses into one pass."
       recognise="Look for 'contiguous subarray or substring' plus a best, longest, shortest or fixed-size requirement. Then ask three questions: what makes a window valid, what does growing change, and what does shrinking restore?"

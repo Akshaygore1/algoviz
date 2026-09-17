@@ -7,15 +7,8 @@ function BacktrackingPage() {
   return (
     <VisualizerPage
       breadcrumb="Algorithms / Backtracking"
-      badges={["Algorithm", "Intermediate", "O(branchingᵈᵉᵖᵗʰ)"]}
       title="Backtracking"
       intro="Backtracking is depth-first search over decisions. You make one choice, explore everything that follows from it, and then undo it exactly, so the next choice starts from a clean slate. Every example on this page runs that same three-beat rhythm: choose, explore, un-choose. Watch the call stack grow, watch a branch get rejected before it wastes any work, and watch the board return to its previous state on the way back up."
-      interviewNote={{
-        heading: "Answering a backtracking question",
-        body: "State the three pieces before writing code: what one decision is, when you stop (a complete candidate, or an impossible one), and what you must undo after recursing. Then say out loud where you prune: a branch rejected early is worth more than any micro-optimisation. If the interviewer asks about complexity, describe the shape of the tree (branching factor to the power of the depth) rather than reaching for a single formula.",
-        to: "/patterns",
-        linkLabel: "See the interview patterns →",
-      }}
     >
       <BacktrackingVisualizer />
 

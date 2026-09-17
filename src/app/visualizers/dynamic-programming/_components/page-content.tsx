@@ -40,15 +40,8 @@ function DpPage() {
   return (
     <VisualizerPage
       breadcrumb="Algorithms / Dynamic Programming"
-      badges={["Algorithm", "Intermediate → Advanced", "O(2ⁿ) → O(n)"]}
       title="Dynamic Programming"
       intro="Dynamic programming is not a trick to memorise; it is what happens when you notice that your recursion keeps solving the same sub-problem. So every example here is solved five times: plain recursion, the same recursion with the duplicated calls marked, memoization, a bottom-up table, and finally the version that throws away everything it no longer needs. Keep the input fixed, switch stages, and watch the counters."
-      interviewNote={{
-        heading: "How to actually answer a DP question",
-        body: 'Say the state out loud first: "dp[i] is the best answer using the first i items." Then write the recurrence, then the base cases, then decide whether you want it top-down (memoized recursion, closest to how you thought about it) or bottom-up (a loop, no stack). Only optimise space if you are asked. Interviewers care much more that you can define the state precisely than that you produce the tightest possible code.',
-        to: "/patterns",
-        linkLabel: "See the DP patterns →",
-      }}
     >
       <DpVisualizer />
 

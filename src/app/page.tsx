@@ -2,7 +2,7 @@ import Content from "./_components/page-content";
 
 const TITLE = "DSA Visualizer: See how algorithms actually work";
 const DESCRIPTION =
-  "Learn data structures and algorithms through step-by-step interactive visualizations, master the patterns behind coding interviews, and track your interview readiness.";
+  "Learn data structures and algorithms through step-by-step interactive visualizations and the patterns behind coding interviews.";
 
 export const metadata = {
   title: TITLE,

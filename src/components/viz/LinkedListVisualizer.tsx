@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { LINKED_LIST_OPS, type ListInput } from "@/lib/viz/algorithms/linkedList";
 import type { ListVizState } from "@/lib/viz/state";
 import { ArrayInputPanel } from "./ArrayInputPanel";
+import { ComplexityCard } from "./ComplexityCard";
 import { NodeChain } from "./NodeChain";
 import { NumberField } from "./NumberField";
 import { OperationPicker } from "./OperationPicker";
@@ -41,59 +42,62 @@ export function LinkedListVisualizer({ operation }: { operation?: string }) {
   );
 
   return (
-    <VizWorkspace
-      definition={definition}
-      steps={steps}
-      renderVisual={(state) => <NodeChain state={state} />}
-      inputPanel={
-        <div className="space-y-3">
-          <OperationPicker
-            operations={LINKED_LIST_OPS.map((o) => ({
-              slug: o.slug,
-              title: o.title.replace(" a linked list", ""),
-            }))}
-            active={slug}
-            onSelect={setSlug}
-          />
-          <ArrayInputPanel
-            values={values}
-            onChange={setValues}
-            presets={presets}
-            maxLength={10}
-            extra={
-              <>
-                {needsValue.has(slug) && (
-                  <NumberField id="ll-value" label="Value" value={value} onChange={setValue} />
-                )}
-                {slug === "linked-list-insert-at" && (
-                  <NumberField
-                    id="ll-pos"
-                    label="Position"
-                    value={position}
-                    onChange={setPosition}
-                    min={0}
-                    max={values.length}
-                  />
-                )}
-                {slug === "linked-list-cycle" && (
-                  <NumberField
-                    id="ll-cycle"
-                    label="Loop to index (-1 = none)"
-                    value={position}
-                    onChange={setPosition}
-                    min={-1}
-                    max={Math.max(0, values.length - 1)}
-                    className="w-44"
-                  />
-                )}
-              </>
-            }
-          />
-          {slug === "linked-list-merge" && (
-            <ArrayInputPanel values={second} onChange={setSecond} maxLength={8} />
-          )}
-        </div>
-      }
-    />
+    <>
+      <VizWorkspace
+        definition={definition}
+        steps={steps}
+        renderVisual={(state) => <NodeChain state={state} />}
+        inputPanel={
+          <div className="space-y-3">
+            <OperationPicker
+              operations={LINKED_LIST_OPS.map((o) => ({
+                slug: o.slug,
+                title: o.title.replace(" a linked list", ""),
+              }))}
+              active={slug}
+              onSelect={setSlug}
+            />
+            <ArrayInputPanel
+              values={values}
+              onChange={setValues}
+              presets={presets}
+              maxLength={10}
+              extra={
+                <>
+                  {needsValue.has(slug) && (
+                    <NumberField id="ll-value" label="Value" value={value} onChange={setValue} />
+                  )}
+                  {slug === "linked-list-insert-at" && (
+                    <NumberField
+                      id="ll-pos"
+                      label="Position"
+                      value={position}
+                      onChange={setPosition}
+                      min={0}
+                      max={values.length}
+                    />
+                  )}
+                  {slug === "linked-list-cycle" && (
+                    <NumberField
+                      id="ll-cycle"
+                      label="Loop to index (-1 = none)"
+                      value={position}
+                      onChange={setPosition}
+                      min={-1}
+                      max={Math.max(0, values.length - 1)}
+                      className="w-44"
+                    />
+                  )}
+                </>
+              }
+            />
+            {slug === "linked-list-merge" && (
+              <ArrayInputPanel values={second} onChange={setSecond} maxLength={8} />
+            )}
+          </div>
+        }
+      />
+      <ComplexityCard complexity={definition.complexity} articleScale className="mt-9 max-w-3xl" />
+    </>
   );
 }

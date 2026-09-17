@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { ComplexityCard } from "@/components/viz/ComplexityCard";
@@ -101,7 +100,6 @@ export function ConceptPage({ concept, visualizer }: { concept: Concept; visuali
             className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
           >
             Explore the {concept.patternId.replaceAll("-", " ")} pattern
-            <ArrowRight aria-hidden="true" className="size-3.5" />
           </Link>
         </Section>
       </div>

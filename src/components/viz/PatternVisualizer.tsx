@@ -7,6 +7,7 @@ import { PATTERN_DEMOS } from "@/lib/viz/patternDemos";
 import type { PatternId } from "@/data/patterns";
 import type { ProblemInput } from "@/lib/viz/problemState";
 import { ProblemCanvas } from "./ProblemCanvas";
+import { ComplexityCard } from "./ComplexityCard";
 import { ProblemInputPanel } from "./ProblemInputPanel";
 import { VizWorkspace } from "./VizWorkspace";
 
@@ -22,7 +23,7 @@ export function PatternVisualizer({ patternId }: { patternId: PatternId }) {
   }, [demo, input]);
 
   return (
-    <div className="space-y-3">
+    <div>
       <div className="flex flex-wrap items-start justify-between gap-3 border-y border-border px-3 py-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
@@ -46,26 +47,33 @@ export function PatternVisualizer({ patternId }: { patternId: PatternId }) {
         )}
       </div>
 
-      {steps.length > 0 ? (
-        <VizWorkspace
-          definition={demo.definition}
-          steps={steps}
-          renderVisual={(state) => <ProblemCanvas state={state} />}
-          keyboardShortcuts={false}
-          inputPanel={
-            <ProblemInputPanel
-              fields={demo.definition.fields}
-              value={input}
-              idPrefix={`pattern-${patternId}`}
-              onChange={setInput}
-            />
-          }
-        />
-      ) : (
-        <p className="border-y border-border py-4 text-sm text-muted-foreground">
-          Enter a valid input above to run this example.
-        </p>
-      )}
+      <div className="mt-3">
+        {steps.length > 0 ? (
+          <VizWorkspace
+            definition={demo.definition}
+            steps={steps}
+            renderVisual={(state) => <ProblemCanvas state={state} />}
+            keyboardShortcuts={false}
+            inputPanel={
+              <ProblemInputPanel
+                fields={demo.definition.fields}
+                value={input}
+                idPrefix={`pattern-${patternId}`}
+                onChange={setInput}
+              />
+            }
+          />
+        ) : (
+          <p className="border-y border-border py-4 text-sm text-muted-foreground">
+            Enter a valid input above to run this example.
+          </p>
+        )}
+      </div>
+      <ComplexityCard
+        complexity={demo.definition.complexity}
+        articleScale
+        className="mt-9 max-w-3xl"
+      />
     </div>
   );
 }

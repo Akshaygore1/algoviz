@@ -10,7 +10,7 @@ export default SelectionSortPage;
 
 function SelectionSortPage() {
   return (
-    <AppShell breadcrumb="Algorithms / Sorting / Selection Sort">
+    <AppShell>
       <div className="mx-auto px-6 pt-6 pb-16">
         <header className="max-w-3xl">
           <PageBreadcrumb

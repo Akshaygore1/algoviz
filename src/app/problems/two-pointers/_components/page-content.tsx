@@ -8,7 +8,6 @@ export default TwoPointersPage;
 function TwoPointersPage() {
   return (
     <ProblemCategoryPage
-      breadcrumb="Interview prep / Problems / Two Pointers"
       title="Two Pointers"
       intro="Five problems built on one move: instead of trying every pair, place a cursor at each end and let the comparison decide which one to retire. Every step throws away a whole group of candidates, which is how an O(n²) scan becomes a single pass."
       recognise="Reach for two pointers when the input is sorted, when the answer is a pair or a triplet, when you compare something to its mirror, or when the brute force is 'try every pair'. The key question is always: after this comparison, which side can I safely discard and why?"

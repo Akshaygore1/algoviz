@@ -11,7 +11,6 @@ import { VizWorkspace } from "@/components/viz/VizWorkspace";
 import type { ProblemDefinition, ProblemInput, ProblemVizState } from "@/lib/viz/problemState";
 
 interface Props {
-  breadcrumb: string;
   title: string;
   intro: string;
   recognise: string;

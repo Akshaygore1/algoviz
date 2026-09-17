@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { VisualizerPage } from "@/components/content/VisualizerPage";
 import { BinarySearchVisualizer } from "@/components/viz/BinarySearchVisualizer";
 import { binarySearch } from "@/lib/viz/algorithms/binarySearch";
@@ -23,7 +22,7 @@ export default function BinarySearchPage() {
           href="/learn/binary-search"
           className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
         >
-          Learn the full concept <ArrowRight aria-hidden="true" className="size-3.5" />
+          Learn the full concept
         </Link>
       </section>
     </VisualizerPage>
