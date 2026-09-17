@@ -11,6 +11,7 @@ interface Props {
   intro: string;
   children: ReactNode;
   complexity?: ComplexityInfo;
+  note?: { title: string; body: string };
 }
 
 const BREADCRUMB_LINKS: Record<string, string> = {
@@ -30,6 +31,7 @@ export function VisualizerPage({
   intro,
   children,
   complexity,
+  note,
 }: Props) {
   const items =
     breadcrumbs ??
@@ -55,6 +57,12 @@ export function VisualizerPage({
 
         {complexity && (
           <ComplexityCard complexity={complexity} articleScale className="mt-9 max-w-3xl" />
+        )}
+        {note && (
+          <section className="mt-10 max-w-3xl border-t border-border pt-8">
+            <h2 className="text-xl font-semibold tracking-[-0.02em]">{note.title}</h2>
+            <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">{note.body}</p>
+          </section>
         )}
       </div>
     </AppShell>

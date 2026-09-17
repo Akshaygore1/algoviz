@@ -11,7 +11,6 @@ import { ArrayInputPanel } from "./ArrayInputPanel";
 import { BoardGrid, ChipRow } from "./BoardGrid";
 import { CallStackPanel } from "./CallStackPanel";
 import { CallTree } from "./CallTree";
-import { ComplexityCard } from "./ComplexityCard";
 import { NumberField } from "./NumberField";
 import { OperationPicker } from "./OperationPicker";
 import { VizCounters } from "./VizCounters";
@@ -266,6 +265,7 @@ export function BacktrackingVisualizer() {
       <VizWorkspace
         definition={definition}
         steps={steps}
+        complexity={definition.complexity}
         renderVisual={(state) => <BacktrackingCanvas state={state} />}
         inputPanel={
           <div className="space-y-3">
@@ -283,7 +283,6 @@ export function BacktrackingVisualizer() {
           </div>
         }
       />
-      <ComplexityCard complexity={definition.complexity} />
     </div>
   );
 }

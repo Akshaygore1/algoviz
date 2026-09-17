@@ -9,7 +9,6 @@ import { dpStage, type DpInput, type DpStage } from "@/lib/viz/algorithms/dp/sha
 import type { DpVizState } from "@/lib/viz/state";
 import type { CellState } from "@/lib/viz/types";
 import { ArrayInputPanel } from "./ArrayInputPanel";
-import { ComplexityCard } from "./ComplexityCard";
 import { CallStackPanel } from "./CallStackPanel";
 import { CallTree } from "./CallTree";
 import { DpTable } from "./DpTable";
@@ -301,29 +300,27 @@ export function DpVisualizer() {
   };
 
   return (
-    <>
-      <VizWorkspace
-        definition={definition}
-        steps={steps}
-        renderVisual={(state) => <DpCanvas state={state} />}
-        inputPanel={
-          <div className="space-y-3">
-            <OperationPicker
-              operations={DP_SPECS.map((s) => ({ slug: s.slug, title: s.title }))}
-              active={slug}
-              onSelect={(next) => setSlug(next)}
-              label="Problem"
-            />
-            <StagePicker active={stage} onSelect={setStage} />
-            <p className="rounded-md border border-border bg-card px-3 py-2 text-xs text-muted-foreground">
-              <span className="font-medium text-foreground">What one cell means: </span>
-              {spec.stateMeaning}
-            </p>
-            {controls()}
-          </div>
-        }
-      />
-      <ComplexityCard complexity={definition.complexity} articleScale className="mt-9 max-w-3xl" />
-    </>
+    <VizWorkspace
+      definition={definition}
+      steps={steps}
+      complexity={definition.complexity}
+      renderVisual={(state) => <DpCanvas state={state} />}
+      inputPanel={
+        <div className="space-y-3">
+          <OperationPicker
+            operations={DP_SPECS.map((s) => ({ slug: s.slug, title: s.title }))}
+            active={slug}
+            onSelect={(next) => setSlug(next)}
+            label="Problem"
+          />
+          <StagePicker active={stage} onSelect={setStage} />
+          <p className="rounded-md border border-border bg-card px-3 py-2 text-xs text-muted-foreground">
+            <span className="font-medium text-foreground">What one cell means: </span>
+            {spec.stateMeaning}
+          </p>
+          {controls()}
+        </div>
+      }
+    />
   );
 }

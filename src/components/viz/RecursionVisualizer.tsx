@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { RECURSION_OPS } from "@/lib/viz/algorithms/recursion";
 import type { FrameVizState } from "@/lib/viz/state";
 import { ArrayInputPanel } from "./ArrayInputPanel";
-import { ComplexityCard } from "./ComplexityCard";
 import { CallStackPanel } from "./CallStackPanel";
 import { CallTree } from "./CallTree";
 import { NumberField } from "./NumberField";
@@ -93,72 +92,70 @@ export function RecursionVisualizer() {
   const limits = N_LIMITS[slug];
 
   return (
-    <>
-      <VizWorkspace
-        definition={definition}
-        steps={steps}
-        renderVisual={(state) => <RecursionCanvas state={state} />}
-        inputPanel={
-          <div className="space-y-3">
-            <OperationPicker
-              operations={RECURSION_OPS.map((o) => ({ slug: o.slug, title: o.title }))}
-              active={slug}
-              onSelect={setSlug}
-              label="Example"
-            />
+    <VizWorkspace
+      definition={definition}
+      steps={steps}
+      complexity={definition.complexity}
+      renderVisual={(state) => <RecursionCanvas state={state} />}
+      inputPanel={
+        <div className="space-y-3">
+          <OperationPicker
+            operations={RECURSION_OPS.map((o) => ({ slug: o.slug, title: o.title }))}
+            active={slug}
+            onSelect={setSlug}
+            label="Example"
+          />
 
-            {limits && (
-              <div className="flex flex-wrap items-end gap-3">
-                <NumberField
-                  id="recursion-n"
-                  label={limits.label}
-                  value={Math.min(limits.max, Math.max(limits.min, n))}
-                  onChange={(next) => setN(Math.min(limits.max, Math.max(limits.min, next)))}
-                  min={limits.min}
-                  max={limits.max}
-                />
-                <p className="pb-2 text-xs text-muted-foreground">
-                  Between {limits.min} and {limits.max}; beyond that the tree stops being readable.
-                </p>
-              </div>
-            )}
-
-            {slug === "sum-array" && (
-              <ArrayInputPanel
-                values={values}
-                onChange={setValues}
-                maxLength={8}
-                presets={[
-                  { label: "Small", values: [4, 8, 2, 7] },
-                  { label: "Longer", values: [5, 1, 9, 3, 6, 2] },
-                  { label: "With negatives", values: [10, -4, 7, -2] },
-                ]}
+          {limits && (
+            <div className="flex flex-wrap items-end gap-3">
+              <NumberField
+                id="recursion-n"
+                label={limits.label}
+                value={Math.min(limits.max, Math.max(limits.min, n))}
+                onChange={(next) => setN(Math.min(limits.max, Math.max(limits.min, next)))}
+                min={limits.min}
+                max={limits.max}
               />
-            )}
+              <p className="pb-2 text-xs text-muted-foreground">
+                Between {limits.min} and {limits.max}; beyond that the tree stops being readable.
+              </p>
+            </div>
+          )}
 
-            {slug === "reverse-string" && (
-              <div className="flex flex-wrap items-end gap-3">
-                <div className="w-52 space-y-1.5">
-                  <Label htmlFor="recursion-text" className="text-xs text-muted-foreground">
-                    Word (max 8 characters)
-                  </Label>
-                  <Input
-                    id="recursion-text"
-                    value={text}
-                    onChange={(e) => setText(e.target.value.slice(0, 8))}
-                    className="font-mono"
-                    placeholder="stack"
-                  />
-                </div>
-                <p className="pb-2 text-xs text-muted-foreground">
-                  Every character adds one frame to the stack.
-                </p>
+          {slug === "sum-array" && (
+            <ArrayInputPanel
+              values={values}
+              onChange={setValues}
+              maxLength={8}
+              presets={[
+                { label: "Small", values: [4, 8, 2, 7] },
+                { label: "Longer", values: [5, 1, 9, 3, 6, 2] },
+                { label: "With negatives", values: [10, -4, 7, -2] },
+              ]}
+            />
+          )}
+
+          {slug === "reverse-string" && (
+            <div className="flex flex-wrap items-end gap-3">
+              <div className="w-52 space-y-1.5">
+                <Label htmlFor="recursion-text" className="text-xs text-muted-foreground">
+                  Word (max 8 characters)
+                </Label>
+                <Input
+                  id="recursion-text"
+                  value={text}
+                  onChange={(e) => setText(e.target.value.slice(0, 8))}
+                  className="font-mono"
+                  placeholder="stack"
+                />
               </div>
-            )}
-          </div>
-        }
-      />
-      <ComplexityCard complexity={definition.complexity} articleScale className="mt-9 max-w-3xl" />
-    </>
+              <p className="pb-2 text-xs text-muted-foreground">
+                Every character adds one frame to the stack.
+              </p>
+            </div>
+          )}
+        </div>
+      }
+    />
   );
 }

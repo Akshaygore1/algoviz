@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import { QUEUE_OPS } from "@/lib/viz/algorithms/queueOps";
 import { ArrayInputPanel } from "./ArrayInputPanel";
-import { ComplexityCard } from "./ComplexityCard";
 import { NumberField } from "./NumberField";
 import { OperationPicker } from "./OperationPicker";
 import { QueueRow } from "./QueueRow";
@@ -21,43 +20,41 @@ export function QueueVisualizer({ operation }: { operation?: string }) {
   );
 
   return (
-    <>
-      <VizWorkspace
-        definition={definition}
-        steps={steps}
-        renderVisual={(state) => <QueueRow state={state} />}
-        inputPanel={
-          <div className="space-y-3">
-            <OperationPicker
-              operations={QUEUE_OPS.map((o) => ({ slug: o.slug, title: o.title }))}
-              active={slug}
-              onSelect={setSlug}
-            />
-            <ArrayInputPanel
-              values={values}
-              onChange={setValues}
-              maxLength={8}
-              presets={[
-                { label: "Five jobs", values: [5, 8, 12, 3, 7] },
-                { label: "Three jobs", values: [1, 2, 3] },
-              ]}
-              extra={
-                slug === "circular-queue" ? (
-                  <NumberField
-                    id="q-cap"
-                    label="Capacity"
-                    value={capacity}
-                    onChange={setCapacity}
-                    min={3}
-                    max={8}
-                  />
-                ) : undefined
-              }
-            />
-          </div>
-        }
-      />
-      <ComplexityCard complexity={definition.complexity} articleScale className="mt-9 max-w-3xl" />
-    </>
+    <VizWorkspace
+      definition={definition}
+      steps={steps}
+      complexity={definition.complexity}
+      renderVisual={(state) => <QueueRow state={state} />}
+      inputPanel={
+        <div className="space-y-3">
+          <OperationPicker
+            operations={QUEUE_OPS.map((o) => ({ slug: o.slug, title: o.title }))}
+            active={slug}
+            onSelect={setSlug}
+          />
+          <ArrayInputPanel
+            values={values}
+            onChange={setValues}
+            maxLength={8}
+            presets={[
+              { label: "Five jobs", values: [5, 8, 12, 3, 7] },
+              { label: "Three jobs", values: [1, 2, 3] },
+            ]}
+            extra={
+              slug === "circular-queue" ? (
+                <NumberField
+                  id="q-cap"
+                  label="Capacity"
+                  value={capacity}
+                  onChange={setCapacity}
+                  min={3}
+                  max={8}
+                />
+              ) : undefined
+            }
+          />
+        </div>
+      }
+    />
   );
 }

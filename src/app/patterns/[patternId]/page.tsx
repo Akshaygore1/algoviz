@@ -93,7 +93,7 @@ export default async function PatternPage({ params }: Props) {
             <ul className="mt-5 divide-y border-y border-border">
               {related.slice(0, 5).map((problem) => (
                 <li key={problem.id} className="py-3 text-sm text-muted-foreground">
-                  {problem.title} <span className="font-mono text-xs">· {problem.difficulty}</span>
+                  {problem.title}
                 </li>
               ))}
             </ul>
