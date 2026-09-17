@@ -58,9 +58,9 @@ export default async function PatternPage({ params }: Props) {
         </section>
 
         <div className="mt-10 grid max-w-3xl gap-10 md:grid-cols-2">
-          <section className="border-t border-border pt-8">
+          <section>
             <h2 className="text-xl font-semibold tracking-[-0.02em]">Recognize it</h2>
-            <ul className="mt-5 divide-y border-y border-border">
+            <ul className="mt-5">
               {pattern.recognize.map((cue) => (
                 <li key={cue} className="py-4 text-[17px] leading-[27px] text-muted-foreground">
                   {cue}
@@ -68,9 +68,9 @@ export default async function PatternPage({ params }: Props) {
               ))}
             </ul>
           </section>
-          <section className="border-t border-border pt-8">
+          <section>
             <h2 className="text-xl font-semibold tracking-[-0.02em]">Common mistakes</h2>
-            <ul className="mt-5 divide-y border-y border-border">
+            <ul className="mt-5">
               {pattern.mistakes.map((mistake) => (
                 <li key={mistake} className="py-4 text-[17px] leading-[27px] text-muted-foreground">
                   {mistake}
@@ -80,17 +80,17 @@ export default async function PatternPage({ params }: Props) {
           </section>
         </div>
 
-        <section className="mt-10 max-w-3xl border-t border-border pt-8">
+        <section className="mt-10 max-w-3xl">
           <h2 className="text-xl font-semibold tracking-[-0.02em]">Implementation template</h2>
-          <pre className="mt-5 overflow-auto border-y border-border bg-viz-surface p-4 font-mono text-xs leading-6">
+          <pre className="mt-5 overflow-auto bg-viz-surface p-4 font-mono text-xs leading-6">
             <code>{pattern.template}</code>
           </pre>
         </section>
 
         {related.length > 0 && (
-          <section className="mt-10 max-w-3xl border-t border-border pt-8">
+          <section className="mt-10 max-w-3xl">
             <h2 className="text-xl font-semibold tracking-[-0.02em]">Related practice</h2>
-            <ul className="mt-5 divide-y border-y border-border">
+            <ul className="mt-5">
               {related.slice(0, 5).map((problem) => (
                 <li key={problem.id} className="py-3 text-sm text-muted-foreground">
                   {problem.title}

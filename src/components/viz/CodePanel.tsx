@@ -11,7 +11,7 @@ interface Props {
 export function CodePanel({ code, language, highlighted }: Props) {
   return (
     <div className="flex h-full flex-col">
-      <header className="flex items-center justify-between border-b border-border px-4 py-2">
+      <header className="flex items-center justify-between px-4 py-2">
         <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
           Code
         </h3>

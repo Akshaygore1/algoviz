@@ -40,13 +40,13 @@ export default function Home() {
 
         <nav
           aria-label="Learning areas"
-          className="mt-12 max-w-3xl divide-y border-y border-border"
+          className="mt-12 grid max-w-3xl grid-cols-1 gap-x-10 gap-y-2 sm:grid-cols-2"
         >
           {destinations.map((destination) => (
             <Link
               key={destination.href}
               href={destination.href}
-              className="group grid gap-2 py-5 outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background sm:grid-cols-[1fr_auto] sm:items-center"
+              className="group py-5 outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
             >
               <span>
                 <span className="block text-[17px] font-semibold tracking-[-0.02em] text-foreground">
@@ -59,13 +59,6 @@ export default function Home() {
             </Link>
           ))}
         </nav>
-
-        <Link
-          href="/roadmap"
-          className="mt-8 inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
-        >
-          Follow the learning roadmap
-        </Link>
       </div>
     </AppShell>
   );

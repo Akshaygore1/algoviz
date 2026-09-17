@@ -7,7 +7,7 @@ import type { Concept } from "@/data/concepts";
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
-    <section id={id} className="max-w-3xl border-t border-border pt-8">
+    <section id={id} className="max-w-3xl pt-8">
       <h2 className="text-xl leading-[26px] font-semibold tracking-[-0.02em] sm:text-2xl sm:leading-8">
         {title}
       </h2>
@@ -39,7 +39,7 @@ export function ConceptPage({ concept, visualizer }: { concept: Concept; visuali
         </header>
 
         <Section id="key-ideas" title="Key ideas">
-          <ul className="mt-5 divide-y border-y border-border">
+          <ul className="mt-5">
             {concept.explanation.map((line) => (
               <li key={line} className="py-4 text-[17px] leading-[27px] text-muted-foreground">
                 {line}
@@ -51,14 +51,14 @@ export function ConceptPage({ concept, visualizer }: { concept: Concept; visuali
         <Section id="operations" title="Operations">
           <div className="mt-5 overflow-x-auto">
             <table className="w-full min-w-[36rem] text-left text-sm">
-              <thead className="border-y border-border text-muted-foreground">
+              <thead className="text-muted-foreground">
                 <tr>
                   <th className="py-3 pr-6 font-medium">Operation</th>
                   <th className="py-3 pr-6 font-medium">Complexity</th>
                   <th className="py-3 font-medium">Why</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border">
+              <tbody>
                 {concept.operations.map((operation) => (
                   <tr key={operation.name}>
                     <td className="py-3 pr-6 font-medium">{operation.name}</td>
@@ -78,14 +78,10 @@ export function ConceptPage({ concept, visualizer }: { concept: Concept; visuali
           <div className="mt-5">{visualizer}</div>
         </section>
 
-        <ComplexityCard
-          complexity={concept.complexity}
-          articleScale
-          className="mt-10 max-w-3xl border-t border-border pt-8"
-        />
+        <ComplexityCard complexity={concept.complexity} articleScale className="mt-10 max-w-3xl" />
 
         <Section id="mistakes" title="Common mistakes">
-          <ul className="mt-5 divide-y border-y border-border">
+          <ul className="mt-5">
             {concept.mistakes.map((mistake) => (
               <li key={mistake} className="py-4 text-[17px] leading-[27px] text-muted-foreground">
                 {mistake}

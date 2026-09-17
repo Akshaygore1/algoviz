@@ -13,7 +13,7 @@ function RecursionPage() {
       <RecursionVisualizer />
 
       <div className="mt-10 grid max-w-3xl gap-10 md:grid-cols-2">
-        <section className="border-t border-border pt-8">
+        <section>
           <h2 className="text-xl font-semibold tracking-[-0.02em]">Common mistakes</h2>
           <ul className="mt-5 space-y-3 text-[17px] leading-[27px] text-muted-foreground">
             <li>
@@ -33,7 +33,7 @@ function RecursionPage() {
             </li>
           </ul>
         </section>
-        <section className="border-t border-border pt-8">
+        <section>
           <h2 className="text-xl font-semibold tracking-[-0.02em]">How to read the tree</h2>
           <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">
             A node appears the moment its call starts and shows its return value the moment it

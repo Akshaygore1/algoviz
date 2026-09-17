@@ -12,7 +12,7 @@ export default function BinarySearchPage() {
       complexity={binarySearch.complexity}
     >
       <BinarySearchVisualizer />
-      <section className="mt-10 max-w-3xl border-t border-border pt-8">
+      <section className="mt-10 max-w-3xl">
         <h2 className="text-xl font-semibold tracking-[-0.02em]">Recognising it</h2>
         <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">
           Use binary search when an input is ordered or a yes/no test changes only once as a value

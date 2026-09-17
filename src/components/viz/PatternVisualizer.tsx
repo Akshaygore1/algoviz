@@ -22,7 +22,7 @@ export function PatternVisualizer({ patternId }: { patternId: PatternId }) {
 
   return (
     <div>
-      <div className="flex flex-wrap items-start justify-between gap-3 border-y border-border px-3 py-3">
+      <div className="flex flex-wrap items-start justify-between gap-3 px-3 py-3">
         <div className="min-w-0">
           <h3 className="text-sm font-semibold">Try it: {demo.example}</h3>
           <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
@@ -57,7 +57,7 @@ export function PatternVisualizer({ patternId }: { patternId: PatternId }) {
             }
           />
         ) : (
-          <p className="border-y border-border py-4 text-sm text-muted-foreground">
+          <p className="py-4 text-sm text-muted-foreground">
             Enter a valid input above to run this example.
           </p>
         )}

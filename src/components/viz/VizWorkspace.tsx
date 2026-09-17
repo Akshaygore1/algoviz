@@ -49,24 +49,21 @@ export function VizWorkspace<TState, TInput>({
       onRestart={player.restart}
       onSpeed={player.setSpeed}
       onScrub={player.setIndex}
-      showShortcuts={keyboardShortcuts}
     />
   );
 
   return (
     <>
       <section className="overflow-hidden border border-border bg-card">
-        {inputPanel && (
-          <div className="border-b border-border bg-viz-surface px-4 py-3">{inputPanel}</div>
-        )}
+        {inputPanel && <div className="bg-viz-surface px-4 py-3">{inputPanel}</div>}
 
         <div className="grid lg:grid-cols-[1.65fr_0.95fr]">
-          <div className="min-h-[360px] bg-viz-surface lg:min-h-[440px] lg:border-r lg:border-border">
+          <div className="min-h-[360px] bg-viz-surface lg:min-h-[440px]">
             {renderVisual(step.state)}
           </div>
           <div className="min-h-[360px] bg-card lg:min-h-[440px]">
             <Tabs defaultValue="explain" className="flex h-full flex-col">
-              <TabsList className="h-auto justify-start rounded-none border-b border-border bg-transparent p-1.5">
+              <TabsList className="h-auto justify-start rounded-none bg-transparent p-1.5">
                 <TabsTrigger value="code">Code</TabsTrigger>
                 <TabsTrigger value="explain">Explanation</TabsTrigger>
               </TabsList>

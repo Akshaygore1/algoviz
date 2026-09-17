@@ -108,7 +108,7 @@ function VisualizersIndex() {
     <AppShell>
       <div className="mx-auto px-6 pt-6 pb-16 sm:px-8">
         <header className="max-w-3xl">
-          <PageBreadcrumb items={[{ label: "Visualizers" }]} />
+          <PageBreadcrumb items={[{ label: "Visualizers" }]} backHref="/home" />
           <h1 className="mt-6 text-xl leading-8 font-semibold tracking-[-0.03em] sm:text-4xl sm:leading-10">
             Visualizers
           </h1>
@@ -119,7 +119,7 @@ function VisualizersIndex() {
           </p>
         </header>
 
-        <div className="mt-10 max-w-3xl divide-y border-y border-border">
+        <div className="mt-10 max-w-3xl">
           {ready.map((v) => (
             <Link
               key={v.to}

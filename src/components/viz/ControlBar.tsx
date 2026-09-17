@@ -29,12 +29,11 @@ interface Props {
   onRestart: () => void;
   onSpeed: (s: Speed) => void;
   onScrub: (i: number) => void;
-  showShortcuts?: boolean;
 }
 
 export function ControlBar(p: Props) {
   return (
-    <div className="flex flex-col gap-3 border-t border-border bg-card px-4 py-3">
+    <div className="flex flex-col gap-2 bg-card px-3 py-2">
       <div className="flex flex-wrap items-center gap-2">
         <Button
           variant="outline"
@@ -54,14 +53,8 @@ export function ControlBar(p: Props) {
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
-        <Button
-          size="sm"
-          onClick={p.onToggle}
-          className="min-w-24"
-          aria-label={p.playing ? "Pause" : "Play"}
-        >
+        <Button size="icon" onClick={p.onToggle} aria-label={p.playing ? "Pause" : "Play"}>
           {p.playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-          {p.playing ? "Pause" : "Play"}
         </Button>
         <Button
           variant="outline"
@@ -81,9 +74,8 @@ export function ControlBar(p: Props) {
         >
           <ChevronLast className="h-4 w-4" />
         </Button>
-        <Button variant="ghost" size="sm" onClick={p.onRestart} aria-label="Restart">
+        <Button variant="ghost" size="icon" onClick={p.onRestart} aria-label="Restart">
           <RotateCcw className="h-4 w-4" />
-          Restart
         </Button>
 
         <div className="ml-auto flex items-center gap-1 border border-border bg-background p-0.5">
@@ -111,15 +103,6 @@ export function ControlBar(p: Props) {
           step {p.index + 1} / {p.total}
         </span>
       </div>
-
-      {p.showShortcuts !== false && (
-        <p className="text-[11px] text-muted-foreground">
-          Shortcuts: <kbd className="font-mono">Space</kbd> play/pause ·{" "}
-          <kbd className="font-mono">←</kbd> <kbd className="font-mono">→</kbd> step ·{" "}
-          <kbd className="font-mono">R</kbd> restart · <kbd className="font-mono">+</kbd>/
-          <kbd className="font-mono">−</kbd> speed
-        </p>
-      )}
     </div>
   );
 }

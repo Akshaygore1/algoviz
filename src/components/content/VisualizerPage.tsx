@@ -20,7 +20,6 @@ const BREADCRUMB_LINKS: Record<string, string> = {
   Visualizers: "/visualizers",
   Patterns: "/patterns",
   Problems: "/problems",
-  Roadmap: "/roadmap",
 };
 
 /** Shared article layout for every visualizer page. */
@@ -59,7 +58,7 @@ export function VisualizerPage({
           <ComplexityCard complexity={complexity} articleScale className="mt-9 max-w-3xl" />
         )}
         {note && (
-          <section className="mt-10 max-w-3xl border-t border-border pt-8">
+          <section className="mt-10 max-w-3xl">
             <h2 className="text-xl font-semibold tracking-[-0.02em]">{note.title}</h2>
             <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">{note.body}</p>
           </section>

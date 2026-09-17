@@ -13,9 +13,9 @@ export default function SelectionSortPage() {
       complexity={selectionSort.complexity}
     >
       <SortVisualizer definition={selectionSort} />
-      <section className="mt-10 max-w-3xl border-t border-border pt-8">
+      <section className="mt-10 max-w-3xl">
         <h2 className="text-xl font-semibold tracking-[-0.02em]">Characteristics</h2>
-        <dl className="mt-5 divide-y border-y border-border">
+        <dl className="mt-5">
           <div className="py-4">
             <dt className="text-[17px] leading-[27px] font-semibold">In place, not stable</dt>
             <dd className="mt-3 text-[17px] leading-[27px] text-muted-foreground">

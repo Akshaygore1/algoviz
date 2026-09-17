@@ -45,7 +45,7 @@ function DpPage() {
     >
       <DpVisualizer />
 
-      <section className="mt-10 max-w-3xl border-t border-border pt-8">
+      <section className="mt-10 max-w-3xl">
         <h2 className="text-xl font-semibold tracking-[-0.02em]">The five stages side by side</h2>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full min-w-[560px] text-left text-sm">
@@ -59,7 +59,7 @@ function DpPage() {
             </thead>
             <tbody className="text-muted-foreground">
               {STAGE_ROWS.map(([stage, time, space, note]) => (
-                <tr key={stage} className="border-t border-border">
+                <tr key={stage}>
                   <td className="py-2 pr-4 font-medium text-foreground">{stage}</td>
                   <td className="py-2 pr-4 font-mono text-xs">{time}</td>
                   <td className="py-2 pr-4 font-mono text-xs">{space}</td>
@@ -76,7 +76,7 @@ function DpPage() {
       </section>
 
       <div className="mt-10 grid max-w-3xl gap-10 md:grid-cols-2">
-        <section className="border-t border-border pt-8">
+        <section>
           <h2 className="text-xl font-semibold tracking-[-0.02em]">How to spot a DP problem</h2>
           <ul className="mt-5 space-y-3 text-[17px] leading-[27px] text-muted-foreground">
             <li>It asks for a best, a count, or a yes/no over many choices, not for a position.</li>
@@ -91,7 +91,7 @@ function DpPage() {
             <li>The input sizes are small enough that a table of states fits in memory.</li>
           </ul>
         </section>
-        <section className="border-t border-border pt-8">
+        <section>
           <h2 className="text-xl font-semibold tracking-[-0.02em]">Common mistakes</h2>
           <ul className="mt-5 space-y-3 text-[17px] leading-[27px] text-muted-foreground">
             <li>

@@ -201,7 +201,7 @@ function Legend({ states }: { states: CellState[] }) {
   const shown = STATE_ORDER.filter((s) => states.includes(s));
   if (shown.length <= 1) return null;
   return (
-    <ul className="flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1.5 border-t border-border/60 pt-3 text-[11px] text-muted-foreground">
+    <ul className="flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1.5 pt-3 text-[11px] text-muted-foreground">
       {shown.map((s) => (
         <li key={s} className="flex items-center gap-1.5">
           <span className={cn("h-2.5 w-2.5 rounded-sm border", CELL_CLASS[s])} aria-hidden />

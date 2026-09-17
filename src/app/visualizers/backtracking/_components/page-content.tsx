@@ -13,7 +13,7 @@ function BacktrackingPage() {
       <BacktrackingVisualizer />
 
       <div className="mt-10 grid max-w-3xl gap-10 md:grid-cols-2">
-        <section className="border-t border-border pt-8">
+        <section>
           <h2 className="text-xl font-semibold tracking-[-0.02em]">The template</h2>
           <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">
             Almost every backtracking solution is this shape. Once you can see it, the problems stop
@@ -42,7 +42,7 @@ function BacktrackingPage() {
             </li>
           </ol>
         </section>
-        <section className="border-t border-border pt-8">
+        <section>
           <h2 className="text-xl font-semibold tracking-[-0.02em]">Common mistakes</h2>
           <ul className="mt-5 space-y-3 text-[17px] leading-[27px] text-muted-foreground">
             <li>

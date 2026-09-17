@@ -4,11 +4,11 @@ import { useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { ComplexityCard } from "@/components/viz/ComplexityCard";
-import { OperationPicker } from "@/components/viz/OperationPicker";
 import { ProblemCanvas } from "@/components/viz/ProblemCanvas";
 import { ProblemInputPanel } from "@/components/viz/ProblemInputPanel";
 import { VizWorkspace } from "@/components/viz/VizWorkspace";
 import type { ProblemDefinition, ProblemInput, ProblemVizState } from "@/lib/viz/problemState";
+import { ProblemPicker } from "./ProblemPicker";
 
 interface Props {
   title: string;
@@ -45,15 +45,14 @@ export function ProblemCategoryPage({ title, intro, recognise, mistakes, problem
         </header>
 
         <div className="mt-10">
-          <OperationPicker
-            label="Problem"
-            operations={problems.map((problem) => ({ slug: problem.slug, title: problem.title }))}
+          <ProblemPicker
+            problems={problems.map((problem) => ({ slug: problem.slug, title: problem.title }))}
             active={definition.slug}
             onSelect={setSlug}
           />
         </div>
 
-        <section className="mt-8 max-w-3xl border-t border-border pt-8">
+        <section className="mt-8 max-w-3xl">
           <h2 className="text-xl font-semibold tracking-[-0.02em]">{definition.title}</h2>
           <p className="mt-3 text-[17px] leading-[27px] text-muted-foreground">
             {definition.tagline}
@@ -62,7 +61,7 @@ export function ProblemCategoryPage({ title, intro, recognise, mistakes, problem
 
         <div className="mt-8">
           {steps.length === 0 ? (
-            <p className="border-y border-border py-4 text-sm text-muted-foreground">
+            <p className="py-4 text-sm text-muted-foreground">
               Enter a valid input above to run this problem.
             </p>
           ) : (
@@ -86,17 +85,17 @@ export function ProblemCategoryPage({ title, intro, recognise, mistakes, problem
         <ComplexityCard
           complexity={definition.complexity}
           articleScale
-          className="mt-10 max-w-3xl border-t border-border pt-8"
+          className="mt-10 max-w-3xl"
         />
 
-        <section className="mt-10 max-w-3xl border-t border-border pt-8">
+        <section className="mt-10 max-w-3xl">
           <h2 className="text-xl font-semibold tracking-[-0.02em]">Recognising the pattern</h2>
           <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">{recognise}</p>
         </section>
 
-        <section className="mt-10 max-w-3xl border-t border-border pt-8">
+        <section className="mt-10 max-w-3xl">
           <h2 className="text-xl font-semibold tracking-[-0.02em]">Common mistakes</h2>
-          <ul className="mt-5 divide-y border-y border-border">
+          <ul className="mt-5">
             {mistakes.map((mistake) => (
               <li key={mistake} className="py-4 text-[17px] leading-[27px] text-muted-foreground">
                 {mistake}

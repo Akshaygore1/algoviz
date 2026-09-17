@@ -13,7 +13,7 @@ export default function InsertionSortPage() {
       complexity={insertionSort.complexity}
     >
       <SortVisualizer definition={insertionSort} />
-      <section className="mt-10 max-w-3xl border-t border-border pt-8">
+      <section className="mt-10 max-w-3xl">
         <h2 className="text-xl font-semibold tracking-[-0.02em]">What to remember</h2>
         <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">
           Insertion sort is stable and in place. It is useful for very small or nearly sorted

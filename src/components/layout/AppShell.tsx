@@ -12,7 +12,7 @@ interface Props {
 export function AppShell({ children }: Props) {
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
-      <header className="sticky top-0 z-20 border-b border-transparent bg-background/90 backdrop-blur-md">
+      <header className="sticky top-0 z-20 bg-background/90 backdrop-blur-md">
         <div className="mx-auto flex h-16 w-full max-w-360 items-center px-5 sm:px-8 lg:px-10">
           <Link
             href="/home"

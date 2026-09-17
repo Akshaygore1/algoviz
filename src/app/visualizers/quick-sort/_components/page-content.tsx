@@ -13,7 +13,7 @@ export default function QuickSortPage() {
       complexity={quickSort.complexity}
     >
       <SortVisualizer definition={quickSort} initial={[8, 3, 5, 1, 9, 6]} maxLength={10} />
-      <section className="mt-10 max-w-3xl border-t border-border pt-8">
+      <section className="mt-10 max-w-3xl">
         <h2 className="text-xl font-semibold tracking-[-0.02em]">What to remember</h2>
         <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">
           Partitioning is the important move. It also powers quickselect, which finds a k-th value

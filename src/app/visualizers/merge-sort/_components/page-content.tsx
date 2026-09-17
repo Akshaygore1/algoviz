@@ -13,7 +13,7 @@ export default function MergeSortPage() {
       complexity={mergeSort.complexity}
     >
       <SortVisualizer definition={mergeSort} initial={[8, 3, 5, 1, 9, 6]} maxLength={10} />
-      <section className="mt-10 max-w-3xl border-t border-border pt-8">
+      <section className="mt-10 max-w-3xl">
         <h2 className="text-xl font-semibold tracking-[-0.02em]">What to remember</h2>
         <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">
           Merge sort is stable but not in place. Its reusable operation is the merge itself: two

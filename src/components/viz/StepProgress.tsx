@@ -27,7 +27,7 @@ export function StepProgress({ index, total, onScrub, className }: StepProgressP
           <span
             key={stepIndex}
             className={cn(
-              "mx-auto aspect-square w-full max-w-2 border transition-colors duration-150",
+              "h-2 w-full border transition-colors duration-150",
               stepIndex <= safeIndex
                 ? "border-foreground bg-foreground"
                 : "border-border bg-transparent",
