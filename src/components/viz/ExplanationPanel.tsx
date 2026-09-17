@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import type { AlgorithmStep, StepType } from "@/lib/viz/types";
 
 const TYPE_LABEL: Record<StepType, string> = {
@@ -27,27 +26,20 @@ export function ExplanationPanel<T>({
   return (
     <div className="flex h-full flex-col">
       <header className="flex items-center justify-between gap-2 border-b border-border px-4 py-2">
-        <h3 className="text-xs font-semibold tracking-wide text-muted-foreground">
-          What&apos;s happening
-        </h3>
-        <Badge variant="secondary" className="font-mono text-[10px]">
+        <h3 className="text-xs font-semibold text-muted-foreground">What&apos;s happening</h3>
+        <span className="font-mono text-[10px] text-muted-foreground">
           {TYPE_LABEL[step.type]} · {index + 1}/{total}
-        </Badge>
+        </span>
       </header>
       <div className="min-h-0 flex-1 space-y-4 overflow-auto px-4 py-3">
         <p aria-live="polite" className="text-sm leading-relaxed text-muted-foreground">
           {step.description}
         </p>
         <div>
-          <h4 className="mb-2 text-[11px] font-semibold tracking-wide text-muted-foreground uppercase">
-            Variables
-          </h4>
-          <dl className="grid grid-cols-2 gap-1.5">
+          <h4 className="mb-2 text-[11px] font-semibold text-muted-foreground">Variables</h4>
+          <dl className="grid grid-cols-2 divide-x divide-y border-y border-border">
             {Object.entries(step.variables).map(([key, value]) => (
-              <div
-                key={key}
-                className="flex items-center justify-between gap-2 rounded-md border border-border bg-muted/40 px-2 py-1"
-              >
+              <div key={key} className="flex items-center justify-between gap-2 px-2 py-1.5">
                 <dt className="font-mono text-[11px] text-muted-foreground">{key}</dt>
                 <dd className="font-mono text-xs font-medium">{String(value)}</dd>
               </div>

@@ -19,14 +19,14 @@ function BacktrackingPage() {
     >
       <BacktrackingVisualizer />
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-xl border border-border bg-card p-6">
-          <h2 className="text-base font-semibold">The template</h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      <div className="mt-10 grid max-w-3xl gap-10 md:grid-cols-2">
+        <section className="border-t border-border pt-8">
+          <h2 className="text-xl font-semibold tracking-[-0.02em]">The template</h2>
+          <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">
             Almost every backtracking solution is this shape. Once you can see it, the problems stop
             looking different from each other.
           </p>
-          <ol className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+          <ol className="mt-5 space-y-3 text-[17px] leading-[27px] text-muted-foreground">
             <li>
               <span className="font-medium text-foreground">1. Base case.</span> Is the candidate
               complete? Record it and return.
@@ -48,10 +48,10 @@ function BacktrackingPage() {
               for byte, then try the next option.
             </li>
           </ol>
-        </div>
-        <div className="rounded-xl border border-border bg-card p-6">
-          <h2 className="text-base font-semibold">Common mistakes</h2>
-          <ul className="mt-2 space-y-2 text-sm leading-relaxed text-muted-foreground">
+        </section>
+        <section className="border-t border-border pt-8">
+          <h2 className="text-xl font-semibold tracking-[-0.02em]">Common mistakes</h2>
+          <ul className="mt-5 space-y-3 text-[17px] leading-[27px] text-muted-foreground">
             <li>
               Forgetting to un-choose. The next branch then inherits state it never chose, and the
               answers come out wrong in ways that are hard to read.
@@ -73,7 +73,7 @@ function BacktrackingPage() {
               zero every time.
             </li>
           </ul>
-        </div>
+        </section>
       </div>
     </VisualizerPage>
   );

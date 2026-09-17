@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
-import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/layout/AppShell";
-import { ProblemCard } from "@/components/content/ProblemCard";
-import { Badge } from "@/components/ui/badge";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { PatternVisualizer } from "@/components/viz/PatternVisualizer";
 import { getPattern, patterns } from "@/data/patterns";
 import { problems } from "@/data/problems";
 
-type Props = {
-  params: Promise<{ patternId: string }>;
-};
+type Props = { params: Promise<{ patternId: string }> };
 
 export const dynamicParams = false;
 
@@ -22,93 +19,61 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { patternId } = await params;
   const pattern = getPattern(patternId);
-
-  if (!pattern) {
-    return { title: "Pattern not found" };
-  }
-
-  const title = `${pattern.name}: DSA Interview Pattern`;
-
+  if (!pattern) return { title: "Pattern not found" };
   return {
-    title,
+    title: `${pattern.name}: DSA Interview Pattern`,
     description: pattern.summary,
-    openGraph: { title, description: pattern.summary },
+    openGraph: { title: `${pattern.name}: DSA Interview Pattern`, description: pattern.summary },
   };
 }
 
 export default async function PatternPage({ params }: Props) {
   const { patternId } = await params;
   const pattern = getPattern(patternId);
-
   if (!pattern) notFound();
-
   const related = problems.filter((problem) => problem.patternIds.includes(pattern.id));
 
   return (
-    <AppShell breadcrumb={`Interview prep / Patterns / ${pattern.name}`}>
-      <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
-        <Link
-          href="/patterns"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-        >
-          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          All patterns
-        </Link>
-
-        <header className="mt-6 max-w-3xl">
-          <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{pattern.name}</h1>
-            <Badge variant="outline" className="font-mono text-[11px]">
-              {pattern.complexity}
-            </Badge>
-          </div>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+    <AppShell>
+      <div className="mx-auto px-6 pt-6 pb-16 sm:px-8">
+        <header className="max-w-3xl">
+          <PageBreadcrumb
+            items={[{ label: "Patterns", href: "/patterns" }, { label: pattern.name }]}
+          />
+          <h1 className="mt-6 text-xl leading-8 font-semibold tracking-[-0.03em] text-balance sm:text-4xl sm:leading-10">
+            {pattern.name}
+          </h1>
+          <p className="mt-5 max-w-[70ch] text-[17px] leading-[27px] text-muted-foreground">
             {pattern.summary}
           </p>
         </header>
 
-        <section aria-labelledby="interactive-example" className="mt-8">
-          <div className="mb-3 flex items-center justify-between border-b pb-3">
-            <h2 id="interactive-example" className="text-sm font-semibold">
-              Interactive example
-            </h2>
-            <span className="hidden text-xs text-muted-foreground sm:inline">
-              Change the input, then step through the solution
-            </span>
+        <section className="mt-10">
+          <h2 className="text-xl font-semibold tracking-[-0.02em]">Interactive example</h2>
+          <p className="mt-3 text-[17px] leading-[27px] text-muted-foreground">
+            Change the input, then walk through the solution one step at a time.
+          </p>
+          <div className="mt-5">
+            <PatternVisualizer patternId={pattern.id} />
           </div>
-          <PatternVisualizer patternId={pattern.id} />
         </section>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-10">
-          <section aria-labelledby="recognize-pattern">
-            <h2 id="recognize-pattern" className="border-b pb-3 text-sm font-semibold">
-              Recognize this pattern
-            </h2>
-            <ul className="mt-4 space-y-3">
+        <div className="mt-10 grid max-w-3xl gap-10 md:grid-cols-2">
+          <section className="border-t border-border pt-8">
+            <h2 className="text-xl font-semibold tracking-[-0.02em]">Recognize it</h2>
+            <ul className="mt-5 divide-y border-y border-border">
               {pattern.recognize.map((cue) => (
-                <li key={cue} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                  <span aria-hidden="true" className="font-medium text-primary">
-                    →
-                  </span>
+                <li key={cue} className="py-4 text-[17px] leading-[27px] text-muted-foreground">
                   {cue}
                 </li>
               ))}
             </ul>
           </section>
-
-          <section aria-labelledby="common-mistakes">
-            <h2 id="common-mistakes" className="border-b pb-3 text-sm font-semibold">
-              Common mistakes
-            </h2>
-            <ul className="mt-4 space-y-3">
+          <section className="border-t border-border pt-8">
+            <h2 className="text-xl font-semibold tracking-[-0.02em]">Common mistakes</h2>
+            <ul className="mt-5 divide-y border-y border-border">
               {pattern.mistakes.map((mistake) => (
-                <li
-                  key={mistake}
-                  className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
-                >
-                  <span aria-hidden="true" className="font-semibold text-viz-compare">
-                    !
-                  </span>
+                <li key={mistake} className="py-4 text-[17px] leading-[27px] text-muted-foreground">
                   {mistake}
                 </li>
               ))}
@@ -116,36 +81,31 @@ export default async function PatternPage({ params }: Props) {
           </section>
         </div>
 
-        <section aria-labelledby="pattern-template" className="mt-10">
-          <h2 id="pattern-template" className="border-b pb-3 text-sm font-semibold">
-            Implementation template
-          </h2>
-          <pre className="mt-4 overflow-auto rounded-lg border bg-viz-surface p-4 font-mono text-xs leading-6">
+        <section className="mt-10 max-w-3xl border-t border-border pt-8">
+          <h2 className="text-xl font-semibold tracking-[-0.02em]">Implementation template</h2>
+          <pre className="mt-5 overflow-auto border-y border-border bg-viz-surface p-4 font-mono text-xs leading-6">
             <code>{pattern.template}</code>
           </pre>
         </section>
 
-        <section aria-labelledby="practice-problems" className="mt-10">
-          <div className="flex items-end justify-between border-b pb-3">
-            <h2 id="practice-problems" className="text-sm font-semibold">
-              Practice problems
-            </h2>
-            <span className="font-mono text-xs text-muted-foreground">
-              {related.length} available
-            </span>
-          </div>
-          {related.length > 0 ? (
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((problem) => (
-                <ProblemCard key={problem.id} problem={problem} />
+        {related.length > 0 && (
+          <section className="mt-10 max-w-3xl border-t border-border pt-8">
+            <h2 className="text-xl font-semibold tracking-[-0.02em]">Related practice</h2>
+            <ul className="mt-5 divide-y border-y border-border">
+              {related.slice(0, 5).map((problem) => (
+                <li key={problem.id} className="py-3 text-sm text-muted-foreground">
+                  {problem.title} <span className="font-mono text-xs">· {problem.difficulty}</span>
+                </li>
               ))}
-            </div>
-          ) : (
-            <p className="mt-4 text-sm text-muted-foreground">
-              Practice problems for this pattern are coming soon.
-            </p>
-          )}
-        </section>
+            </ul>
+            <Link
+              href="/problems"
+              className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
+            >
+              Explore visualized problems <ArrowRight aria-hidden="true" className="size-3.5" />
+            </Link>
+          </section>
+        )}
       </div>
     </AppShell>
   );

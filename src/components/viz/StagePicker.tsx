@@ -15,14 +15,18 @@ export function StagePicker({ active, onSelect }: Props) {
   const current = DP_STAGES.find((s) => s.slug === active);
   return (
     <div className="space-y-2">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs text-muted-foreground">Stage:</span>
+      <div className="flex flex-wrap items-center gap-1.5">
+        <span className="mr-1 text-xs text-muted-foreground">Stage</span>
         {DP_STAGES.map((stage) => (
           <Button
             key={stage.slug}
             size="sm"
-            variant={stage.slug === active ? "default" : "secondary"}
-            className={cn("h-7 text-xs", stage.slug === active && "shadow-sm")}
+            variant="ghost"
+            className={cn(
+              "h-7 border-b border-transparent px-2 text-xs",
+              stage.slug === active &&
+                "border-foreground bg-transparent text-foreground hover:bg-transparent",
+            )}
             onClick={() => onSelect(stage.slug)}
             aria-pressed={stage.slug === active}
           >

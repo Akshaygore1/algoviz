@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 
 export default VisualizersIndex;
 
@@ -103,26 +104,23 @@ const ready = [
   },
 ];
 
-const planned = [
-  "Heap Sort",
-  "Graphs: BFS, DFS, Dijkstra",
-  "Topological sort",
-  "Union Find",
-  "Trie",
-];
-
 function VisualizersIndex() {
   return (
-    <AppShell breadcrumb="Visualizers">
-      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-        <h1 className="text-3xl font-semibold tracking-tight">Visualizers</h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Each visualizer runs on the same step engine: custom input, play/pause, forward and
-          backward stepping, speed control, synced code, live variables and a plain-language
-          explanation of every step.
-        </p>
+    <AppShell>
+      <div className="mx-auto px-6 pt-6 pb-16 sm:px-8">
+        <header className="max-w-3xl">
+          <PageBreadcrumb items={[{ label: "Visualizers" }]} />
+          <h1 className="mt-6 text-xl leading-8 font-semibold tracking-[-0.03em] sm:text-4xl sm:leading-10">
+            Visualizers
+          </h1>
+          <p className="mt-5 max-w-[70ch] text-[17px] leading-[27px] text-muted-foreground">
+            Each visualizer runs on the same step engine: custom input, play/pause, forward and
+            backward stepping, speed control, synced code, live variables and a plain-language
+            explanation of every step.
+          </p>
+        </header>
 
-        <div className="mt-8 divide-y border-y border-border">
+        <div className="mt-10 max-w-3xl divide-y border-y border-border">
           {ready.map((v) => (
             <Link
               key={v.to}
@@ -134,18 +132,11 @@ function VisualizersIndex() {
                   <h2 className="font-semibold tracking-tight">{v.title}</h2>
                   <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v.body}</p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">{v.body}</p>
               </div>
               <span className="font-mono text-[11px] text-muted-foreground sm:pt-1">{v.meta}</span>
             </Link>
           ))}
-        </div>
-
-        <div className="mt-10 border-b border-border pb-6">
-          <h2 className="text-sm font-semibold tracking-tight">Coming next</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {planned.join(" · ")}: all use the same step engine.
-          </p>
         </div>
       </div>
     </AppShell>

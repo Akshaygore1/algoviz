@@ -1,7 +1,6 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { AlgorithmDefinition, AlgorithmStep } from "@/lib/viz/types";
 import { useStepPlayer } from "@/hooks/use-step-player";
@@ -52,54 +51,41 @@ export function VizWorkspace<TState, TInput>({
   );
 
   return (
-    <section className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+    <section className="overflow-hidden border border-border bg-card">
       {inputPanel && (
         <div className="border-b border-border bg-viz-surface px-4 py-3">{inputPanel}</div>
       )}
 
-      {/* Desktop: stacked visual + controls + resizable code/explanation */}
-      <div className="hidden md:block">
-        <div className="min-h-[320px] bg-viz-surface">{renderVisual(step.state)}</div>
-        {controls}
-        <ResizablePanelGroup className="min-h-[300px]">
-          <ResizablePanel defaultSize="55%" minSize="30%">
-            <CodePanel
-              code={definition.code}
-              language={definition.language}
-              highlighted={step.highlightedCodeLines}
-            />
-          </ResizablePanel>
-          <ResizableHandle withHandle />
-          <ResizablePanel defaultSize="45%" minSize="25%">
-            <ExplanationPanel step={step} index={player.index} total={player.total} />
-          </ResizablePanel>
-        </ResizablePanelGroup>
+      <div className="grid lg:grid-cols-[1.65fr_0.95fr]">
+        <div className="min-h-[360px] bg-viz-surface lg:min-h-[440px] lg:border-r lg:border-border">
+          {renderVisual(step.state)}
+        </div>
+        <div className="min-h-[360px] bg-card lg:min-h-[440px]">
+          <Tabs defaultValue="explain" className="flex h-full flex-col">
+            <TabsList className="h-auto justify-start rounded-none border-b border-border bg-transparent p-1.5">
+              <TabsTrigger value="code">Code</TabsTrigger>
+              <TabsTrigger value="explain">Explanation</TabsTrigger>
+            </TabsList>
+            <TabsContent
+              value="explain"
+              className="m-0 min-h-0 flex-1 data-[state=inactive]:hidden"
+            >
+              <ExplanationPanel step={step} index={player.index} total={player.total} />
+            </TabsContent>
+            <TabsContent
+              value="code"
+              className="m-0 min-h-0 flex-1 overflow-hidden data-[state=inactive]:hidden"
+            >
+              <CodePanel
+                code={definition.code}
+                language={definition.language}
+                highlighted={step.highlightedCodeLines}
+              />
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
-
-      {/* Mobile: tabbed panels */}
-      <div className="md:hidden">
-        <Tabs defaultValue="visual">
-          <TabsList className="w-full justify-start rounded-none border-b border-border bg-transparent px-2">
-            <TabsTrigger value="visual">Visual</TabsTrigger>
-            <TabsTrigger value="code">Code</TabsTrigger>
-            <TabsTrigger value="explain">Explanation</TabsTrigger>
-          </TabsList>
-          <TabsContent value="visual" className="m-0">
-            <div className="min-h-[260px] bg-viz-surface">{renderVisual(step.state)}</div>
-          </TabsContent>
-          <TabsContent value="code" className="m-0 h-[320px]">
-            <CodePanel
-              code={definition.code}
-              language={definition.language}
-              highlighted={step.highlightedCodeLines}
-            />
-          </TabsContent>
-          <TabsContent value="explain" className="m-0 h-[320px]">
-            <ExplanationPanel step={step} index={player.index} total={player.total} />
-          </TabsContent>
-        </Tabs>
-        {controls}
-      </div>
+      {controls}
     </section>
   );
 }

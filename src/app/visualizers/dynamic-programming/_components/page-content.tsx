@@ -52,8 +52,8 @@ function DpPage() {
     >
       <DpVisualizer />
 
-      <div className="rounded-xl border border-border bg-card p-6">
-        <h2 className="text-base font-semibold">The five stages side by side</h2>
+      <section className="mt-10 max-w-3xl border-t border-border pt-8">
+        <h2 className="text-xl font-semibold tracking-[-0.02em]">The five stages side by side</h2>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full min-w-[560px] text-left text-sm">
             <thead>
@@ -76,16 +76,16 @@ function DpPage() {
             </tbody>
           </table>
         </div>
-        <p className="mt-3 text-xs text-muted-foreground">
+        <p className="mt-4 text-sm leading-6 text-muted-foreground">
           The exact costs for the problem you are running are shown in the complexity card, which
           updates with the stage.
         </p>
-      </div>
+      </section>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-xl border border-border bg-card p-6">
-          <h2 className="text-base font-semibold">How to spot a DP problem</h2>
-          <ul className="mt-2 space-y-2 text-sm leading-relaxed text-muted-foreground">
+      <div className="mt-10 grid max-w-3xl gap-10 md:grid-cols-2">
+        <section className="border-t border-border pt-8">
+          <h2 className="text-xl font-semibold tracking-[-0.02em]">How to spot a DP problem</h2>
+          <ul className="mt-5 space-y-3 text-[17px] leading-[27px] text-muted-foreground">
             <li>It asks for a best, a count, or a yes/no over many choices, not for a position.</li>
             <li>
               A greedy choice can be shown to fail, but the answer can be written in terms of the
@@ -97,10 +97,10 @@ function DpPage() {
             </li>
             <li>The input sizes are small enough that a table of states fits in memory.</li>
           </ul>
-        </div>
-        <div className="rounded-xl border border-border bg-card p-6">
-          <h2 className="text-base font-semibold">Common mistakes</h2>
-          <ul className="mt-2 space-y-2 text-sm leading-relaxed text-muted-foreground">
+        </section>
+        <section className="border-t border-border pt-8">
+          <h2 className="text-xl font-semibold tracking-[-0.02em]">Common mistakes</h2>
+          <ul className="mt-5 space-y-3 text-[17px] leading-[27px] text-muted-foreground">
             <li>
               A vague state definition. If you cannot finish the sentence “dp[i] is…”, the
               recurrence will be wrong.
@@ -115,7 +115,7 @@ function DpPage() {
               version is much harder to debug.
             </li>
           </ul>
-        </div>
+        </section>
       </div>
     </VisualizerPage>
   );

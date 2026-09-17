@@ -1,6 +1,7 @@
-import { ArrowLeft, type LucideIcon } from "lucide-react";
+import { ArrowRight, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 
 export type MainPageCard = {
   href: string;
@@ -14,45 +15,33 @@ type MainPageProps = {
   breadcrumb?: string;
 };
 
-/** A consistent, navigable card grid for top-level app pages. */
+/** A consistent, text-first index for top-level learning paths. */
 export function MainPage({ title, cards, breadcrumb = title }: MainPageProps) {
-  const isHome = breadcrumb === "Home";
-
   return (
-    <AppShell breadcrumb={breadcrumb}>
-      <header className="mx-auto flex w-full max-w-300 flex-col items-center px-5 py-10 sm:min-h-44 sm:px-8 lg:px-10">
-        <h1 className="text-center text-xl font-medium tracking-tight text-foreground sm:text-[1.375rem]">
-          {title}
-        </h1>
-        {!isHome && (
-          <Link
-            href="/home"
-            aria-label="Back to home"
-            className="mt-8 inline-flex size-8 self-start items-center justify-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <ArrowLeft aria-hidden="true" className="size-4" />
-          </Link>
-        )}
-      </header>
+    <AppShell>
+      <div className="mx-auto w-full px-6 pt-6 pb-16 sm:px-8">
+        <header className="max-w-3xl">
+          <PageBreadcrumb items={[{ label: breadcrumb }]} />
+          <h1 className="mt-6 text-xl leading-8 font-semibold tracking-[-0.03em] sm:text-4xl sm:leading-10">
+            {title}
+          </h1>
+        </header>
 
-      <div className="mx-auto w-full max-w-300 px-4 pt-10 pb-16 sm:pt-12 sm:pb-20">
-        <div className="mt-8 grid grid-cols-2 gap-2.5 lg:grid-cols-3">
+        <div className="mt-10 max-w-3xl divide-y border-y border-border">
           {cards.map((card) => {
-            const Icon = card.icon;
-
             return (
               <Link
                 key={card.href}
                 href={card.href}
-                className="group relative flex items-center justify-center gap-2.5 rounded-lg bg-card px-3.5 py-2.5 outline-none"
+                className="group grid gap-2 py-5 outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background sm:grid-cols-[1fr_auto] sm:items-center"
               >
-                <Icon
-                  aria-hidden="true"
-                  className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground"
-                />
-                <span className="text-lg font-medium tracking-tight text-foreground">
+                <span className="text-[17px] font-semibold tracking-[-0.02em] text-foreground">
                   {card.title}
                 </span>
+                <ArrowRight
+                  aria-hidden="true"
+                  className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+                />
               </Link>
             );
           })}

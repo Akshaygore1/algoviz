@@ -77,17 +77,21 @@ export function ArrayInputPanel({ values, onChange, presets, extra, maxLength = 
       {error && <p className="text-xs text-viz-error">{error}</p>}
 
       {presets && presets.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs text-muted-foreground">Presets:</span>
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="mr-1 text-xs text-muted-foreground">Presets</span>
           {presets.map((p) => {
             const isRandomPreset = p.label.trim().toLowerCase() === "random";
 
             return (
               <Button
                 key={p.label}
-                variant={isRandomPreset ? "outline" : "secondary"}
+                variant={isRandomPreset ? "outline" : "ghost"}
                 size="sm"
-                className={isRandomPreset ? "shrink-0" : "h-7 text-xs"}
+                className={
+                  isRandomPreset
+                    ? "shrink-0"
+                    : "h-7 border-b border-transparent px-2 text-xs hover:border-foreground hover:bg-transparent"
+                }
                 onClick={() => {
                   setRaw(p.values.join(" "));
                   setError(null);

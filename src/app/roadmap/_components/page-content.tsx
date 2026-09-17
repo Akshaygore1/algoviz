@@ -1,70 +1,54 @@
-"use client";
-
 import Link from "next/link";
-import { ArrowRight, Check, Lock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
-import { Progress } from "@/components/ui/progress";
+import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";
 import { roadmap } from "@/data/roadmap";
-import { useProgress } from "@/hooks/use-progress";
 
-export default RoadmapPage;
-
-function RoadmapPage() {
-  const progress = useProgress();
-
+export default function RoadmapPage() {
   return (
-    <AppShell breadcrumb="Progress / Roadmap">
-      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
-        <h1 className="text-3xl font-semibold tracking-tight">Learning roadmap</h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Work top to bottom. Each topic is complete when you finish its concept page: visualizer,
-          quiz and practice problems included.
-        </p>
+    <AppShell>
+      <div className="mx-auto px-6 pt-6 pb-16 sm:px-8">
+        <header className="max-w-3xl">
+          <PageBreadcrumb items={[{ label: "Roadmap" }]} />
+          <h1 className="mt-6 text-xl leading-8 font-semibold tracking-[-0.03em] sm:text-4xl sm:leading-10">
+            Learning roadmap
+          </h1>
+          <p className="mt-5 max-w-[70ch] text-[17px] leading-[27px] text-muted-foreground">
+            Work from top to bottom, then use the visualizers to make each idea concrete.
+          </p>
+        </header>
 
-        <div className="mt-8 divide-y border-y border-border">
-          {roadmap.map((track) => {
-            const values = track.topics.map((t) => progress.topics[t.id] ?? 0);
-            const trackPct = Math.round(values.reduce((a, b) => a + b, 0) / values.length);
-            return (
-              <section key={track.id} className="py-6">
-                <div className="flex flex-wrap items-baseline justify-between gap-3">
-                  <h2 className="text-lg font-semibold tracking-tight">{track.title}</h2>
-                  <span className="font-mono text-xs text-muted-foreground">{trackPct}%</span>
-                </div>
-                <p className="mt-2 max-w-2xl text-sm text-muted-foreground">{track.description}</p>
-                <div className="mt-5 space-y-3">
-                  {track.topics.map((topic) => {
-                    const pct = progress.topics[topic.id] ?? 0;
-                    return (
-                      <div key={topic.id} className="flex items-center gap-3">
-                        <div className="w-44 shrink-0 truncate text-sm">
-                          {topic.href ? (
-                            <Link
-                              href={topic.href}
-                              className="inline-flex items-center gap-1.5 font-medium hover:text-primary"
-                            >
-                              {topic.title}
-                              <ArrowRight className="h-3 w-3" />
-                            </Link>
-                          ) : (
-                            <span className="inline-flex items-center gap-1.5 text-muted-foreground">
-                              <Lock className="h-3 w-3" />
-                              {topic.title}
-                            </span>
-                          )}
-                        </div>
-                        <Progress value={pct} className="h-2 flex-1" />
-                        <span className="w-10 shrink-0 text-right font-mono text-xs text-muted-foreground">
-                          {pct}%
-                        </span>
-                        {pct === 100 && <Check className="h-4 w-4 text-viz-success" />}
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            );
-          })}
+        <div className="mt-10 max-w-3xl divide-y border-y border-border">
+          {roadmap.map((track) => (
+            <section key={track.id} className="py-7">
+              <h2 className="text-xl font-semibold tracking-[-0.02em]">{track.title}</h2>
+              <p className="mt-3 max-w-[70ch] text-[17px] leading-[27px] text-muted-foreground">
+                {track.description}
+              </p>
+              <ul className="mt-5 divide-y border-y border-border">
+                {track.topics.map((topic) => (
+                  <li key={topic.id}>
+                    {topic.href ? (
+                      <Link
+                        href={topic.href}
+                        className="group flex items-center justify-between gap-4 py-3 text-sm font-medium outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        {topic.title}
+                        <ArrowRight
+                          aria-hidden="true"
+                          className="size-3.5 shrink-0 transition-transform group-hover:translate-x-0.5"
+                        />
+                      </Link>
+                    ) : (
+                      <span className="block py-3 text-sm text-muted-foreground">
+                        {topic.title}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </div>
       </div>
     </AppShell>

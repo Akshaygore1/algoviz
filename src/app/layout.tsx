@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "DSA Visualizer: Learn algorithms visually",
   applicationName: "DSA Visualizer",
   description:
-    "Interactive step-by-step visualizations for data structures and algorithms, with interview patterns and progress tracking.",
+    "Interactive step-by-step visualizations for data structures, algorithms, and interview patterns.",
   category: "education",
   formatDetection: { email: false, address: false, telephone: false },
   openGraph: { type: "website" },

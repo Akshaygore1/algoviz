@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { PATTERN_DEMOS } from "@/lib/viz/patternDemos";
 import type { PatternId } from "@/data/patterns";
 import type { ProblemInput } from "@/lib/viz/problemState";
@@ -24,13 +23,13 @@ export function PatternVisualizer({ patternId }: { patternId: PatternId }) {
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap items-start justify-between gap-3 rounded-lg border border-border/70 bg-viz-surface/60 px-3 py-3">
+      <div className="flex flex-wrap items-start justify-between gap-3 border-y border-border px-3 py-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <h3 className="text-sm font-semibold">Try it: {demo.example}</h3>
-            <Badge variant="outline" className="font-mono text-[10px]">
+            <span className="font-mono text-[10px] text-muted-foreground">
               {demo.definition.complexity.timeAverage}
-            </Badge>
+            </span>
           </div>
           <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
             Change the input, then step through the same shape you would explain in an interview.
@@ -63,7 +62,7 @@ export function PatternVisualizer({ patternId }: { patternId: PatternId }) {
           }
         />
       ) : (
-        <p className="rounded-lg border border-border bg-viz-surface p-4 text-sm text-muted-foreground">
+        <p className="border-y border-border py-4 text-sm text-muted-foreground">
           Enter a valid input above to run this example.
         </p>
       )}

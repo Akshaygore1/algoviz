@@ -34,7 +34,7 @@ interface Props {
 
 export function ControlBar(p: Props) {
   return (
-    <div className="flex flex-col gap-3 border-t border-border bg-card/60 px-4 py-3">
+    <div className="flex flex-col gap-3 border-t border-border bg-card px-4 py-3">
       <div className="flex flex-wrap items-center gap-2">
         <Button
           variant="outline"
@@ -86,14 +86,14 @@ export function ControlBar(p: Props) {
           Restart
         </Button>
 
-        <div className="ml-auto flex items-center gap-1 rounded-lg border border-border bg-background p-0.5">
+        <div className="ml-auto flex items-center gap-1 border border-border bg-background p-0.5">
           {SPEEDS.map((s) => (
             <button
               key={s}
               onClick={() => p.onSpeed(s)}
               aria-pressed={p.speed === s}
               className={cn(
-                "rounded-md px-2 py-1 font-mono text-xs transition-colors",
+                "px-2 py-1 font-mono text-xs transition-colors",
                 p.speed === s
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",

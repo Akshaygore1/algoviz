@@ -14,12 +14,7 @@ export function StepProgress({ index, total, onScrub, className }: StepProgressP
   const safeIndex = Math.min(Math.max(index, 0), safeTotal - 1);
 
   return (
-    <div
-      className={cn(
-        "relative flex h-5 min-w-0 flex-1 items-center",
-        className,
-      )}
-    >
+    <div className={cn("relative flex h-5 min-w-0 flex-1 items-center", className)}>
       <div
         aria-hidden="true"
         className="grid w-full items-center"

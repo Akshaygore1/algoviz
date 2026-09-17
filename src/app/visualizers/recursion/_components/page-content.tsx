@@ -19,10 +19,10 @@ function RecursionPage() {
     >
       <RecursionVisualizer />
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-xl border border-border bg-card p-6">
-          <h2 className="text-base font-semibold">Common mistakes</h2>
-          <ul className="mt-2 space-y-2 text-sm leading-relaxed text-muted-foreground">
+      <div className="mt-10 grid max-w-3xl gap-10 md:grid-cols-2">
+        <section className="border-t border-border pt-8">
+          <h2 className="text-xl font-semibold tracking-[-0.02em]">Common mistakes</h2>
+          <ul className="mt-5 space-y-3 text-[17px] leading-[27px] text-muted-foreground">
             <li>
               No base case, or a base case the input never hits: the stack grows until it overflows.
             </li>
@@ -39,17 +39,17 @@ function RecursionPage() {
               still crash on a huge input.
             </li>
           </ul>
-        </div>
-        <div className="rounded-xl border border-border bg-card p-6">
-          <h2 className="text-base font-semibold">How to read the tree</h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        </section>
+        <section className="border-t border-border pt-8">
+          <h2 className="text-xl font-semibold tracking-[-0.02em]">How to read the tree</h2>
+          <p className="mt-4 text-[17px] leading-[27px] text-muted-foreground">
             A node appears the moment its call starts and shows its return value the moment it
             finishes. A node marked <span className="font-mono">repeat</span> is a sub-problem
             already solved elsewhere in the tree: the wasted work. A node marked{" "}
             <span className="font-mono">memo</span> answered instantly from the cache and has no
             children at all, which is the entire saving made visible.
           </p>
-        </div>
+        </section>
       </div>
     </VisualizerPage>
   );

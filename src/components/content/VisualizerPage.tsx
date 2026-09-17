@@ -1,66 +1,64 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { ComplexityCard } from "@/components/viz/ComplexityCard";
+import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/layout/PageBreadcrumb";
 import type { ComplexityInfo } from "@/lib/viz/types";
 
 interface Props {
   breadcrumb: string;
-  badges: string[];
+  breadcrumbs?: PageBreadcrumbItem[];
+  /** Retained temporarily so individual learning routes can migrate without visual metadata. */
+  badges?: string[];
   title: string;
   intro: string;
   children: ReactNode;
   complexity?: ComplexityInfo;
+  /** Intentionally not rendered: interview callouts were removed from the product surface. */
   interviewNote?: { heading: string; body: string; to?: string; linkLabel?: string };
 }
 
-/** Shared layout for every visualizer page so they all read the same way. */
+const BREADCRUMB_LINKS: Record<string, string> = {
+  Algorithms: "/algorithms",
+  "Data Structures": "/data-structures",
+  Visualizers: "/visualizers",
+  Patterns: "/patterns",
+  Problems: "/problems",
+  Roadmap: "/roadmap",
+};
+
+/** Shared article layout for every visualizer page. */
 export function VisualizerPage({
   breadcrumb,
-  badges,
+  breadcrumbs,
   title,
   intro,
   children,
   complexity,
-  interviewNote,
 }: Props) {
+  const items =
+    breadcrumbs ??
+    breadcrumb.split(" / ").map((label, index, all) => {
+      const href = index === all.length - 1 ? undefined : BREADCRUMB_LINKS[label];
+      return href ? { label, href } : { label };
+    });
+
   return (
-    <AppShell breadcrumb={breadcrumb}>
-      <div className="mx-auto max-w-6xl space-y-8 px-4 py-8 sm:px-6">
-        <header className="space-y-3">
-          <div className="flex flex-wrap items-center gap-2">
-            {badges.map((b, i) => (
-              <Badge
-                key={b}
-                variant={i === 0 ? "secondary" : "outline"}
-                className={i > 1 ? "font-mono" : undefined}
-              >
-                {b}
-              </Badge>
-            ))}
-          </div>
-          <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
-          <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">{intro}</p>
+    <AppShell>
+      <div className="mx-auto px-6 pt-6 pb-16 sm:px-8">
+        <header className="max-w-3xl">
+          <PageBreadcrumb items={items} />
+          <h1 className="mt-6 text-xl leading-8 font-semibold tracking-[-0.03em] text-balance sm:text-4xl sm:leading-10">
+            {title}
+          </h1>
+          <p className="mt-5 max-w-[70ch] text-[17px] leading-[27px] text-muted-foreground">
+            {intro}
+          </p>
         </header>
 
-        {children}
+        <div className="mt-10">{children}</div>
 
-        {complexity && <ComplexityCard complexity={complexity} />}
-
-        {interviewNote && (
-          <div className="rounded-xl border border-border bg-card p-6">
-            <h2 className="text-base font-semibold">{interviewNote.heading}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              {interviewNote.body}
-            </p>
-            {interviewNote.to && (
-              <Button variant="outline" size="sm" className="mt-4" asChild>
-                <Link href={interviewNote.to}>{interviewNote.linkLabel ?? "Learn more →"}</Link>
-              </Button>
-            )}
-          </div>
+        {complexity && (
+          <ComplexityCard complexity={complexity} articleScale className="mt-9 max-w-3xl" />
         )}
       </div>
     </AppShell>
