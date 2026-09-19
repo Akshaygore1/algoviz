@@ -66,9 +66,10 @@ export function ArrayCanvas({ state, mode = "cells" }: Props) {
               <div
                 style={{ height }}
                 className={cn(
-                  "flex w-10 items-center justify-center rounded-lg border font-mono text-sm font-medium transition-all duration-300 ease-out sm:w-12 sm:text-base",
+                  "viz-state-motion flex w-10 items-center justify-center rounded-lg border font-mono text-sm font-medium sm:w-12 sm:text-base",
                   CELL_CLASS[cellState],
                 )}
+                data-cell-state={cellState}
                 aria-label={`Index ${i}, value ${value}, ${CELL_LABEL[cellState]}`}
               >
                 {value}
@@ -107,11 +108,12 @@ export function ArrayCanvas({ state, mode = "cells" }: Props) {
                 <li key={i}>
                   <div
                     className={cn(
-                      "flex h-9 w-10 items-center justify-center rounded-lg border font-mono text-xs transition-all duration-300 ease-out sm:w-12 sm:text-sm",
+                      "viz-state-motion flex h-9 w-10 items-center justify-center rounded-lg border font-mono text-xs sm:w-12 sm:text-sm",
                       value === null
                         ? "border-dashed border-border bg-transparent text-muted-foreground/40"
                         : CELL_CLASS[cellState],
                     )}
+                    data-cell-state={cellState}
                     aria-label={
                       value === null
                         ? `${auxiliary.label} index ${i}, empty`

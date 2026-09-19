@@ -50,9 +50,10 @@ export function NodeChain({ state }: { state: ListVizState }) {
                   </div>
                   <div
                     className={cn(
-                      "flex h-12 w-14 items-center justify-center rounded-lg border font-mono text-sm font-medium transition-all duration-300",
+                      "viz-state-motion viz-enter flex h-12 w-14 items-center justify-center rounded-lg border font-mono text-sm font-medium",
                       CELL_CLASS[node.state],
                     )}
+                    data-cell-state={node.state}
                     aria-label={`Node ${i}, value ${node.value}, ${CELL_LABEL[node.state]}`}
                   >
                     {node.value}

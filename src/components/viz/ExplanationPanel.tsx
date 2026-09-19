@@ -24,29 +24,33 @@ export function ExplanationPanel<T>({
   total: number;
 }) {
   return (
-    <div className="flex h-full flex-col">
-      <header className="flex items-center justify-between gap-2 px-4 py-2">
-        <h3 className="text-xs font-semibold text-muted-foreground">What&apos;s happening</h3>
-        <span className="font-mono text-[10px] text-muted-foreground">
+    <section aria-label="Current step explanation" className="flex h-full min-h-0 flex-col bg-card">
+      <header className="flex items-center justify-between gap-3 px-4 py-2.5">
+        <h3 className="text-sm font-semibold text-foreground">Explanation</h3>
+        <span className="shrink-0 font-mono text-[10px] text-muted-foreground">
           {TYPE_LABEL[step.type]} · {index + 1}/{total}
         </span>
       </header>
-      <div className="min-h-0 flex-1 space-y-4 overflow-auto px-4 py-3">
-        <p aria-live="polite" className="text-sm leading-relaxed text-muted-foreground">
+
+      <div
+        key={step.id}
+        className="viz-explanation-enter flex min-h-0 flex-1 flex-col gap-3 overflow-auto px-4 pb-3"
+      >
+        <p aria-live="polite" className="text-sm leading-6 text-foreground">
           {step.description}
         </p>
-        <div>
-          <h4 className="mb-2 text-[11px] font-semibold text-muted-foreground">Variables</h4>
-          <dl className="grid grid-cols-2 gap-x-4 gap-y-1">
+
+        {Object.keys(step.variables).length > 0 && (
+          <dl className="flex flex-wrap gap-x-5 gap-y-2">
             {Object.entries(step.variables).map(([key, value]) => (
-              <div key={key} className="flex items-center justify-between gap-2 px-2 py-1.5">
+              <div key={key} className="flex items-baseline gap-2">
                 <dt className="font-mono text-[11px] text-muted-foreground">{key}</dt>
-                <dd className="font-mono text-xs font-medium">{String(value)}</dd>
+                <dd className="font-mono text-xs font-semibold text-foreground">{String(value)}</dd>
               </div>
             ))}
           </dl>
-        </div>
+        )}
       </div>
-    </div>
+    </section>
   );
 }

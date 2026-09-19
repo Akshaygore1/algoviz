@@ -2,11 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { AlgorithmStep } from "@/lib/viz/types";
+import type { VizMotionMode } from "@/components/viz/VizMotionContext";
 
 export const SPEEDS = [0.25, 0.5, 1, 1.5, 2] as const;
 export type Speed = (typeof SPEEDS)[number];
 
 const BASE_DELAY_MS = 900;
+
+type StepSource = "autoplay" | "pointer" | "keyboard" | "scrub" | "jump" | "reset";
 
 export function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -32,6 +35,8 @@ export function useStepPlayer<TState>(
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState<Speed>(defaultSpeed);
+  const [stepSource, setStepSource] = useState<StepSource>("reset");
+  const reducedMotion = usePrefersReducedMotion();
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const last = Math.max(0, steps.length - 1);
@@ -40,6 +45,7 @@ export function useStepPlayer<TState>(
   useEffect(() => {
     setIndex(0);
     setPlaying(false);
+    setStepSource("reset");
   }, [steps]);
 
   useEffect(() => {
@@ -48,23 +54,45 @@ export function useStepPlayer<TState>(
       setPlaying(false);
       return;
     }
-    timer.current = setTimeout(() => setIndex((i) => Math.min(i + 1, last)), BASE_DELAY_MS / speed);
+    timer.current = setTimeout(() => {
+      setStepSource("autoplay");
+      setIndex((i) => Math.min(i + 1, last));
+    }, BASE_DELAY_MS / speed);
     return () => {
       if (timer.current) clearTimeout(timer.current);
     };
   }, [playing, index, last, speed]);
 
-  const next = useCallback(() => setIndex((i) => Math.min(i + 1, last)), [last]);
-  const prev = useCallback(() => setIndex((i) => Math.max(i - 1, 0)), []);
-  const first = useCallback(() => setIndex(0), []);
-  const lastStep = useCallback(() => setIndex(last), [last]);
+  const next = useCallback(() => {
+    setStepSource("pointer");
+    setIndex((i) => Math.min(i + 1, last));
+  }, [last]);
+  const prev = useCallback(() => {
+    setStepSource("pointer");
+    setIndex((i) => Math.max(i - 1, 0));
+  }, []);
+  const first = useCallback(() => {
+    setStepSource("jump");
+    setIndex(0);
+  }, []);
+  const lastStep = useCallback(() => {
+    setStepSource("jump");
+    setIndex(last);
+  }, [last]);
   const restart = useCallback(() => {
     setPlaying(false);
+    setStepSource("reset");
     setIndex(0);
+  }, []);
+  const scrub = useCallback((nextIndex: number) => {
+    setPlaying(false);
+    setStepSource("scrub");
+    setIndex(nextIndex);
   }, []);
   const toggle = useCallback(() => {
     setPlaying((p) => {
       if (!p && index >= last) {
+        setStepSource("reset");
         setIndex(0);
         return true;
       }
@@ -93,12 +121,14 @@ export function useStepPlayer<TState>(
         case "ArrowRight":
           e.preventDefault();
           setPlaying(false);
-          next();
+          setStepSource("keyboard");
+          setIndex((i) => Math.min(i + 1, last));
           break;
         case "ArrowLeft":
           e.preventDefault();
           setPlaying(false);
-          prev();
+          setStepSource("keyboard");
+          setIndex((i) => Math.max(i - 1, 0));
           break;
         case "r":
         case "R":
@@ -116,9 +146,11 @@ export function useStepPlayer<TState>(
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [keyboardShortcuts, toggle, next, prev, restart, stepUp, stepDown]);
+  }, [keyboardShortcuts, toggle, last, restart, stepUp, stepDown]);
 
   const step = useMemo(() => steps[Math.min(index, last)], [steps, index, last]);
+  const instant = ["keyboard", "scrub", "jump", "reset"].includes(stepSource);
+  const motionMode: VizMotionMode = instant ? "instant" : reducedMotion ? "reduced" : "full";
 
   return {
     step,
@@ -127,7 +159,8 @@ export function useStepPlayer<TState>(
     playing,
     speed,
     setSpeed,
-    setIndex,
+    setIndex: scrub,
+    motionMode,
     next,
     prev,
     first,

@@ -45,9 +45,10 @@ export function DpTable({ table }: { table: DpTableViz }) {
                   <td key={ci}>
                     <div
                       className={cn(
-                        "flex h-10 min-w-11 flex-col items-center justify-center rounded-md border transition-all duration-300",
+                        "viz-state-motion flex h-10 min-w-11 flex-col items-center justify-center rounded-md border",
                         CELL_CLASS[cell.state],
                       )}
+                      data-cell-state={cell.state}
                       aria-label={`Cell ${rowLabels?.[ri] ?? ri} ${colLabels?.[ci] ?? ci}, ${
                         cell.value === null ? "not computed" : cell.value
                       }, ${CELL_LABEL[cell.state]}`}

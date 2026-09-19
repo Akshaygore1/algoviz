@@ -75,8 +75,8 @@ export function CallTree({ nodes }: { nodes: CallTreeNode[] }) {
                 y1={py(e.from.depth) + 14}
                 x2={px(e.to.x)}
                 y2={py(e.to.depth) - 14}
-                className="stroke-border"
-                strokeWidth={1.5}
+                className="stroke-viz-edge"
+                strokeWidth={1.75}
               />
             ))}
             {placed.map((n) => (
@@ -89,9 +89,10 @@ export function CallTree({ nodes }: { nodes: CallTreeNode[] }) {
               >
                 <div
                   className={cn(
-                    "flex h-[30px] items-center justify-center gap-1 rounded-md border px-1.5 font-mono text-[11px] whitespace-nowrap transition-all duration-300",
+                    "viz-state-motion viz-enter flex h-[30px] items-center justify-center gap-1 rounded-md border px-1.5 font-mono text-[11px] whitespace-nowrap",
                     CELL_CLASS[n.state],
                   )}
+                  data-cell-state={n.state}
                   aria-label={`${n.label}, ${CELL_LABEL[n.state]}${n.result ? `, returns ${n.result}` : ""}`}
                 >
                   <span className="truncate">{n.label}</span>

@@ -47,9 +47,10 @@ export function BucketTable({ state }: { state: HashVizState }) {
                     )}
                     <span
                       className={cn(
-                        "rounded border px-2 py-0.5 font-mono text-xs transition-all duration-300",
+                        "viz-state-motion viz-enter rounded border px-2 py-0.5 font-mono text-xs",
                         CELL_CLASS[entry.state],
                       )}
+                      data-cell-state={entry.state}
                       aria-label={`Key ${entry.key}, value ${entry.value}, ${CELL_LABEL[entry.state]}`}
                     >
                       {entry.key}:{entry.value}

@@ -48,7 +48,7 @@
 
 :root {
   --radius: 0.25rem;
-  --background: oklch(0.994 0.002 260);
+  --background: #e9edf2;
   --foreground: oklch(0.19 0.02 262);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.19 0.02 262);
@@ -56,16 +56,16 @@
   --popover-foreground: oklch(0.19 0.02 262);
   --primary: oklch(0.16 0 0);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.965 0.006 260);
+  --secondary: #e4e9ef;
   --secondary-foreground: oklch(0.28 0.03 263);
-  --muted: oklch(0.965 0.006 260);
+  --muted: #e4e9ef;
   --muted-foreground: #121212;
-  --accent: oklch(0.955 0 0);
+  --accent: #dce4ed;
   --accent-foreground: oklch(0.24 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.916 0.008 260);
-  --input: oklch(0.916 0.008 260);
+  --border: #bcc6d2;
+  --input: #aeb9c7;
   --ring: oklch(0.16 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -80,8 +80,8 @@
   --sidebar-accent-foreground: oklch(0.24 0 0);
   --sidebar-border: oklch(0.912 0.008 260);
   --sidebar-ring: oklch(0.16 0 0);
-  --viz-default: oklch(0.93 0.008 260);
-  --viz-default-fg: oklch(0.32 0.02 262);
+  --viz-default: #d9e1ea;
+  --viz-default-fg: #263244;
   --viz-inspect: oklch(0.16 0 0);
   --viz-inspect-fg: oklch(0.99 0 0);
   --viz-compare: oklch(0.8 0.15 85);
@@ -94,8 +94,9 @@
   --viz-visited-fg: oklch(0.99 0.01 300);
   --viz-done: oklch(0.72 0.13 155);
   --viz-done-fg: oklch(0.22 0.05 155);
-  --viz-grid: oklch(0.9 0.008 260);
-  --viz-surface: oklch(0.985 0.003 260);
+  --viz-grid: #aeb8c6;
+  --viz-edge: #778599;
+  --viz-surface: #f1f4f8;
 }
 .dark {
   --background: oklch(0.06 0 0);
@@ -140,6 +141,7 @@
   --viz-done: oklch(0.5 0.12 155);
   --viz-done-fg: oklch(0.95 0.02 155);
   --viz-grid: oklch(1 0 0 / 10%);
+  --viz-edge: oklch(0.62 0.015 255);
   --viz-surface: oklch(0.09 0 0);
 }
 @theme inline {
@@ -160,6 +162,7 @@
   --color-viz-done: var(--viz-done);
   --color-viz-done-fg: var(--viz-done-fg);
   --color-viz-grid: var(--viz-grid);
+  --color-viz-edge: var(--viz-edge);
   --color-viz-surface: var(--viz-surface);
 }
 @layer base {
@@ -174,6 +177,18 @@
   }
   ::selection {
     background-color: color-mix(in oklab, var(--primary) 26%, transparent);
+  }
+  .shiki-token {
+    color: var(--shiki-light);
+    font-style: var(--shiki-light-font-style, inherit);
+    font-weight: var(--shiki-light-font-weight, inherit);
+    text-decoration: var(--shiki-light-text-decoration, inherit);
+  }
+  .dark .shiki-token {
+    color: var(--shiki-dark);
+    font-style: var(--shiki-dark-font-style, inherit);
+    font-weight: var(--shiki-dark-font-weight, inherit);
+    text-decoration: var(--shiki-dark-text-decoration, inherit);
   }
 }
 
@@ -193,11 +208,87 @@
     }
   }
 
+  .viz-workspace {
+    --viz-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --viz-ease-move: cubic-bezier(0.77, 0, 0.175, 1);
+    --viz-duration: 200ms;
+  }
+
+  .viz-workspace button {
+    transition: none;
+  }
+
+  .viz-workspace[data-motion="full"] .viz-state-motion {
+    transition-property: transform, opacity;
+    transition-duration: var(--viz-duration);
+    transition-timing-function: var(--viz-ease-out);
+  }
+
+  .viz-workspace[data-motion="full"] .viz-state-motion[data-cell-state="inspect"],
+  .viz-workspace[data-motion="full"] .viz-state-motion[data-cell-state="compare"] {
+    transform: translateY(-2px);
+  }
+
+  .viz-workspace[data-motion="full"] .viz-enter {
+    transition:
+      opacity var(--viz-duration) var(--viz-ease-out),
+      transform var(--viz-duration) var(--viz-ease-out);
+  }
+
+  @starting-style {
+    .viz-workspace[data-motion="full"] .viz-enter {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .viz-workspace[data-motion="full"] .viz-explanation-enter {
+      opacity: 0;
+    }
+  }
+
+  .viz-workspace[data-motion="full"] .viz-explanation-enter {
+    transition: opacity var(--viz-duration) var(--viz-ease-out);
+  }
+
+  .viz-workspace[data-motion="full"] .viz-code-highlight {
+    transition:
+      transform var(--viz-duration) var(--viz-ease-move),
+      opacity var(--viz-duration) var(--viz-ease-out);
+  }
+
+  .viz-workspace[data-motion="full"] .viz-progress-fill {
+    transition: transform var(--viz-duration) linear;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .viz-workspace .viz-control {
+      transition:
+        transform 160ms var(--viz-ease-out),
+        color 160ms ease,
+        background-color 160ms ease,
+        border-color 160ms ease;
+    }
+
+    .viz-workspace .viz-control:active {
+      transform: scale(0.97);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .main-page-card-reveal {
       animation-name: main-page-card-fade;
       animation-duration: 160ms;
       animation-delay: 0ms !important;
+    }
+
+    .viz-workspace .viz-state-motion,
+    .viz-workspace .viz-enter,
+    .viz-workspace .viz-code-highlight,
+    .viz-workspace .viz-progress-fill,
+    .viz-workspace .viz-control {
+      transition-property: opacity, color, background-color, border-color;
+      transition-duration: 160ms;
+      transform: none;
     }
   }
 

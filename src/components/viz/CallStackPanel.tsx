@@ -23,9 +23,10 @@ export function CallStackPanel({ frames }: { frames: FrameVizState["frames"] }) 
             <li
               key={`${frame.id}-${i}`}
               className={cn(
-                "flex items-center justify-between gap-2 rounded-md border px-2.5 py-1.5 font-mono text-xs transition-all duration-300",
+                "viz-state-motion viz-enter flex items-center justify-between gap-2 rounded-md border px-2.5 py-1.5 font-mono text-xs",
                 CELL_CLASS[frame.state],
               )}
+              data-cell-state={frame.state}
               aria-label={`Frame ${frame.label}, ${CELL_LABEL[frame.state]}`}
             >
               <span className="truncate">{frame.label}</span>

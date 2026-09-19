@@ -73,6 +73,7 @@
     "eslint-plugin-prettier": "^5.2.6",
     "prettier": "^3.7.3",
     "react-grab": "^0.2.0",
+    "shiki": "^4.4.3",
     "typescript": "^5.8.3"
   }
 }

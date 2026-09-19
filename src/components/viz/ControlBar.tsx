@@ -33,9 +33,10 @@ interface Props {
 
 export function ControlBar(p: Props) {
   return (
-    <div className="flex flex-col gap-2 bg-card px-3 py-2">
+    <div className="flex flex-col gap-2 border-t border-border bg-card px-3 py-2">
       <div className="flex flex-wrap items-center gap-2">
         <Button
+          className="viz-control"
           variant="outline"
           size="icon"
           onClick={p.onFirst}
@@ -45,6 +46,7 @@ export function ControlBar(p: Props) {
           <ChevronFirst className="h-4 w-4" />
         </Button>
         <Button
+          className="viz-control"
           variant="outline"
           size="icon"
           onClick={p.onPrev}
@@ -53,10 +55,16 @@ export function ControlBar(p: Props) {
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
-        <Button size="icon" onClick={p.onToggle} aria-label={p.playing ? "Pause" : "Play"}>
+        <Button
+          className="viz-control"
+          size="icon"
+          onClick={p.onToggle}
+          aria-label={p.playing ? "Pause" : "Play"}
+        >
           {p.playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
         </Button>
         <Button
+          className="viz-control"
           variant="outline"
           size="icon"
           onClick={p.onNext}
@@ -66,6 +74,7 @@ export function ControlBar(p: Props) {
           <ChevronRight className="h-4 w-4" />
         </Button>
         <Button
+          className="viz-control"
           variant="outline"
           size="icon"
           onClick={p.onLast}
@@ -74,7 +83,13 @@ export function ControlBar(p: Props) {
         >
           <ChevronLast className="h-4 w-4" />
         </Button>
-        <Button variant="ghost" size="icon" onClick={p.onRestart} aria-label="Restart">
+        <Button
+          className="viz-control"
+          variant="ghost"
+          size="icon"
+          onClick={p.onRestart}
+          aria-label="Restart"
+        >
           <RotateCcw className="h-4 w-4" />
         </Button>
 
@@ -85,7 +100,7 @@ export function ControlBar(p: Props) {
               onClick={() => p.onSpeed(s)}
               aria-pressed={p.speed === s}
               className={cn(
-                "px-2 py-1 font-mono text-xs transition-colors",
+                "viz-control px-2 py-1 font-mono text-xs",
                 p.speed === s
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",

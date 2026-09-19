@@ -43,9 +43,10 @@ export function BoardGrid({ cells, label, rowLabels, colLabels }: Props) {
                   <td key={ci}>
                     <div
                       className={cn(
-                        "flex h-10 w-10 flex-col items-center justify-center rounded-md border transition-all duration-300",
+                        "viz-state-motion flex h-10 w-10 flex-col items-center justify-center rounded-md border",
                         CELL_CLASS[cell.state],
                       )}
+                      data-cell-state={cell.state}
                       aria-label={`${rowLabels?.[ri] ?? ri} ${colLabels?.[ci] ?? ci}: ${cell.label}, ${CELL_LABEL[cell.state]}`}
                     >
                       <span className="leading-none">{cell.label}</span>
@@ -77,9 +78,10 @@ export function ChipRow({ cells, label }: { cells: BoardCell[]; label?: string |
           <li
             key={i}
             className={cn(
-              "flex h-9 min-w-9 flex-col items-center justify-center rounded-md border px-2 font-mono text-xs transition-all duration-300",
+              "viz-state-motion viz-enter flex h-9 min-w-9 flex-col items-center justify-center rounded-md border px-2 font-mono text-xs",
               CELL_CLASS[cell.state],
             )}
+            data-cell-state={cell.state}
             aria-label={`${cell.label}, ${CELL_LABEL[cell.state]}`}
           >
             <span className="leading-none">{cell.label}</span>

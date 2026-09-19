@@ -1,13 +1,13 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { AlgorithmDefinition, AlgorithmStep, ComplexityInfo } from "@/lib/viz/types";
 import { useStepPlayer } from "@/hooks/use-step-player";
 import { CodePanel } from "./CodePanel";
 import { ControlBar } from "./ControlBar";
 import { ExplanationPanel } from "./ExplanationPanel";
 import { ComplexityCard } from "./ComplexityCard";
+import { VizMotionProvider } from "./VizMotionContext";
 
 interface Props<TState, TInput> {
   definition: AlgorithmDefinition<TState, TInput>;
@@ -53,37 +53,30 @@ export function VizWorkspace<TState, TInput>({
   );
 
   return (
-    <>
-      <section className="overflow-hidden border border-border bg-card">
-        {inputPanel && <div className="bg-viz-surface px-4 py-3">{inputPanel}</div>}
+    <VizMotionProvider mode={player.motionMode}>
+      <section
+        className="viz-workspace overflow-hidden border border-border bg-card"
+        data-motion={player.motionMode}
+      >
+        {inputPanel && (
+          <div className="border-b border-border bg-viz-surface px-4 py-3">{inputPanel}</div>
+        )}
 
-        <div className="grid lg:grid-cols-[1.65fr_0.95fr]">
-          <div className="min-h-[360px] bg-viz-surface lg:min-h-[440px]">
+        <div className="grid lg:h-[560px] lg:grid-cols-[minmax(0,1.35fr)_minmax(24rem,1fr)] lg:divide-x lg:divide-border">
+          <div className="min-h-[360px] min-w-0 bg-viz-surface lg:min-h-0">
             {renderVisual(step.state)}
           </div>
-          <div className="min-h-[360px] bg-card lg:min-h-[440px]">
-            <Tabs defaultValue="explain" className="flex h-full flex-col">
-              <TabsList className="h-auto justify-start rounded-none bg-transparent p-1.5">
-                <TabsTrigger value="code">Code</TabsTrigger>
-                <TabsTrigger value="explain">Explanation</TabsTrigger>
-              </TabsList>
-              <TabsContent
-                value="explain"
-                className="m-0 min-h-0 flex-1 data-[state=inactive]:hidden"
-              >
-                <ExplanationPanel step={step} index={player.index} total={player.total} />
-              </TabsContent>
-              <TabsContent
-                value="code"
-                className="m-0 min-h-0 flex-1 overflow-hidden data-[state=inactive]:hidden"
-              >
-                <CodePanel
-                  code={definition.code}
-                  language={definition.language}
-                  highlighted={step.highlightedCodeLines}
-                />
-              </TabsContent>
-            </Tabs>
+          <div className="flex min-w-0 flex-col border-t border-border bg-card lg:min-h-0 lg:border-t-0">
+            <div className="h-[420px] min-h-0 overflow-hidden lg:h-auto lg:flex-[4]">
+              <CodePanel
+                code={definition.code}
+                language={definition.language}
+                highlighted={step.highlightedCodeLines}
+              />
+            </div>
+            <div className="min-h-[180px] border-t border-border lg:min-h-[140px] lg:flex-[1]">
+              <ExplanationPanel step={step} index={player.index} total={player.total} />
+            </div>
           </div>
         </div>
         {controls}
@@ -91,6 +84,6 @@ export function VizWorkspace<TState, TInput>({
       {complexity && (
         <ComplexityCard complexity={complexity} articleScale className="mt-9 max-w-3xl" />
       )}
-    </>
+    </VizMotionProvider>
   );
 }

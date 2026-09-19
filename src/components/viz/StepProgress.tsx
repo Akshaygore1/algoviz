@@ -12,28 +12,23 @@ interface StepProgressProps {
 export function StepProgress({ index, total, onScrub, className }: StepProgressProps) {
   const safeTotal = Math.max(1, total);
   const safeIndex = Math.min(Math.max(index, 0), safeTotal - 1);
+  const progress = (safeIndex + 1) / safeTotal;
 
   return (
     <div className={cn("relative flex h-5 min-w-0 flex-1 items-center", className)}>
-      <div
-        aria-hidden="true"
-        className="grid w-full items-center"
-        style={{
-          gridTemplateColumns: `repeat(${safeTotal}, minmax(0, 1fr))`,
-          gap: safeTotal > 64 ? "1px" : "2px",
-        }}
-      >
-        {Array.from({ length: safeTotal }, (_, stepIndex) => (
-          <span
-            key={stepIndex}
-            className={cn(
-              "h-2 w-full border transition-colors duration-150",
-              stepIndex <= safeIndex
-                ? "border-foreground bg-foreground"
-                : "border-border bg-transparent",
-            )}
-          />
-        ))}
+      <div aria-hidden="true" className="relative h-2 w-full overflow-hidden bg-border/60">
+        <span
+          className="viz-progress-fill absolute inset-0 origin-left bg-foreground"
+          style={{ transform: `scaleX(${progress})` }}
+        />
+        <span
+          className="absolute inset-0 grid"
+          style={{ gridTemplateColumns: `repeat(${safeTotal}, minmax(0, 1fr))` }}
+        >
+          {Array.from({ length: safeTotal - 1 }, (_, stepIndex) => (
+            <span key={stepIndex} className="border-r border-card/70" />
+          ))}
+        </span>
       </div>
 
       <input

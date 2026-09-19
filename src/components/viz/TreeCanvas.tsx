@@ -74,17 +74,18 @@ export function TreeCanvas({ state }: { state: TreeVizState }) {
                 y1={py(e.from.y) + 4}
                 x2={px(e.to.x)}
                 y2={py(e.to.y) - 18}
-                className="stroke-border"
-                strokeWidth={1.5}
+                className="stroke-viz-edge"
+                strokeWidth={1.75}
               />
             ))}
             {placed.map((n) => (
               <foreignObject key={n.id} x={px(n.x) - 22} y={py(n.y) - 22} width={44} height={44}>
                 <div
                   className={cn(
-                    "flex h-11 w-11 items-center justify-center rounded-full border font-mono text-sm transition-all duration-300",
+                    "viz-state-motion viz-enter flex h-11 w-11 items-center justify-center rounded-full border font-mono text-sm",
                     CELL_CLASS[n.state],
                   )}
+                  data-cell-state={n.state}
                   aria-label={`Node ${n.value}, ${CELL_LABEL[n.state]}`}
                 >
                   {n.value}

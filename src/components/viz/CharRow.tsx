@@ -27,9 +27,10 @@ export function CharRow({ state }: { state: CharVizState }) {
               <span className="font-mono text-[10px] text-muted-foreground">{i}</span>
               <div
                 className={cn(
-                  "flex h-11 w-9 items-center justify-center rounded-md border font-mono text-sm font-medium transition-all duration-300",
+                  "viz-state-motion flex h-11 w-9 items-center justify-center rounded-md border font-mono text-sm font-medium",
                   CELL_CLASS[c.state],
                 )}
+                data-cell-state={c.state}
                 aria-label={`Index ${i}, character ${c.char}, ${CELL_LABEL[c.state]}`}
               >
                 {c.char === " " ? "␣" : c.char}

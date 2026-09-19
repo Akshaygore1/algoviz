@@ -28,9 +28,10 @@ export function StackColumn({ state }: { state: StackVizState }) {
             <li
               key={i}
               className={cn(
-                "flex h-10 items-center justify-between gap-2 rounded-md border px-3 font-mono text-sm transition-all duration-300",
+                "viz-state-motion viz-enter flex h-10 items-center justify-between gap-2 rounded-md border px-3 font-mono text-sm",
                 CELL_CLASS[item.state],
               )}
+              data-cell-state={item.state}
               aria-label={`Index ${i}, value ${item.value}, ${CELL_LABEL[item.state]}`}
             >
               <span>{item.value}</span>

@@ -118,11 +118,12 @@ function Row({ row }: { row: VizRow }) {
               <div
                 style={{ height }}
                 className={cn(
-                  "relative flex w-9 items-end justify-center overflow-hidden rounded-md border font-mono text-xs font-medium transition-all duration-300 sm:w-10 sm:text-sm",
+                  "viz-state-motion relative flex w-9 items-end justify-center overflow-hidden rounded-md border font-mono text-xs font-medium sm:w-10 sm:text-sm",
                   mode === "cells" && "items-center",
                   CELL_CLASS[cellState],
                   inWindow && cellState === "default" && "ring-2 ring-primary/40",
                 )}
+                data-cell-state={cellState}
                 aria-label={`Index ${i}, value ${value}, ${CELL_LABEL[cellState]}`}
               >
                 {water !== null && water > 0 && (
@@ -173,9 +174,10 @@ function Panel({ panel }: { panel: VizPanel }) {
             <span
               key={e.key}
               className={cn(
-                "rounded-md border px-2 py-1 font-mono text-xs transition-colors",
+                "viz-state-motion rounded-md border px-2 py-1 font-mono text-xs",
                 e.state ? CELL_CLASS[e.state] : "border-border bg-background",
               )}
+              data-cell-state={e.state ?? "default"}
             >
               {e.key === " " ? "␣" : e.key}
               <span className="opacity-60"> → </span>
@@ -204,9 +206,10 @@ function StackPanel({ stack }: { stack: VizStackPanel }) {
             <li
               key={`${item.value}-${i}`}
               className={cn(
-                "flex h-8 min-w-12 items-center justify-center rounded-md border px-2 font-mono text-xs transition-all duration-300",
+                "viz-state-motion viz-enter flex h-8 min-w-12 items-center justify-center rounded-md border px-2 font-mono text-xs",
                 CELL_CLASS[item.state],
               )}
+              data-cell-state={item.state}
             >
               {item.value}
             </li>
@@ -237,9 +240,10 @@ function Chain({ chain }: { chain: VizChain }) {
               <div className="flex items-center gap-1">
                 <div
                   className={cn(
-                    "flex h-11 w-11 items-center justify-center rounded-md border font-mono text-sm transition-all duration-300",
+                    "viz-state-motion viz-enter flex h-11 w-11 items-center justify-center rounded-md border font-mono text-sm",
                     CELL_CLASS[n.state],
                   )}
+                  data-cell-state={n.state}
                   aria-label={`Node ${n.value}, ${CELL_LABEL[n.state]}`}
                 >
                   {n.value}
@@ -282,11 +286,12 @@ function Grid({
             <div
               key={`${ri}-${ci}`}
               className={cn(
-                "flex h-8 w-8 items-center justify-center rounded border font-mono text-xs transition-all duration-300",
+                "viz-state-motion flex h-8 w-8 items-center justify-center rounded border font-mono text-xs",
                 CELL_CLASS[c.state],
                 ci % 3 === 2 && ci !== r.length - 1 && "mr-1",
                 ri % 3 === 2 && ri !== cells.length - 1 && "mb-1",
               )}
+              data-cell-state={c.state}
               aria-label={`Row ${ri + 1} column ${ci + 1}, ${c.value === "." ? "empty" : c.value}`}
             >
               {c.value === "." ? "" : c.value}
@@ -316,9 +321,10 @@ function Graph({ graph }: { graph: VizGraph }) {
           <span
             key={node.id}
             className={cn(
-              "flex h-10 min-w-10 items-center justify-center rounded-full border px-2 font-mono text-sm font-medium transition-colors duration-300",
+              "viz-state-motion viz-enter flex h-10 min-w-10 items-center justify-center rounded-full border px-2 font-mono text-sm font-medium",
               CELL_CLASS[node.state],
             )}
+            data-cell-state={node.state}
             aria-label={`Node ${node.label}, ${CELL_LABEL[node.state]}`}
           >
             {node.label}
@@ -330,9 +336,10 @@ function Graph({ graph }: { graph: VizGraph }) {
           <li
             key={`${edge.from}-${edge.to}-${i}`}
             className={cn(
-              "flex items-center gap-1 rounded-md border px-2 py-1 font-mono text-xs transition-colors duration-300",
+              "viz-state-motion viz-enter flex items-center gap-1 rounded-md border px-2 py-1 font-mono text-xs",
               CELL_CLASS[edge.state ?? "default"],
             )}
+            data-cell-state={edge.state ?? "default"}
             aria-label={`${labels.get(edge.from) ?? edge.from} ${edge.directed ? "to" : "connected to"} ${labels.get(edge.to) ?? edge.to}`}
           >
             <span>{labels.get(edge.from) ?? edge.from}</span>

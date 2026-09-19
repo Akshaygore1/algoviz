@@ -47,7 +47,7 @@ export function StackVisualizer({ operation }: { operation?: string }) {
                   <button
                     key={t}
                     onClick={() => setText(t)}
-                    className="rounded border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+                    className="rounded border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground hover:text-foreground"
                   >
                     {t}
                   </button>

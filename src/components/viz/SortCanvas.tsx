@@ -1,14 +1,17 @@
 "use client";
 
+import { useLayoutEffect, useMemo, useRef } from "react";
 import { CELL_LABEL, type ArrayVizState, type CellState } from "@/lib/viz/types";
 import { cn } from "@/lib/utils";
 import { CELL_CLASS, CELL_MARK, STATE_ORDER } from "./cellStyles";
+import { useVizMotion } from "./VizMotionContext";
 
 interface Props {
   state: ArrayVizState;
 }
 
 export function SortCanvas({ state }: Props) {
+  const motionMode = useVizMotion();
   const { values, cells, pointers, counters, auxiliary } = state;
   const n = values.length;
   const pointerNames = pointers ? Object.keys(pointers) : [];
@@ -25,6 +28,45 @@ export function SortCanvas({ state }: Props) {
   // Height in px: reserve baseline and label space.
   const minH = 28;
   const maxH = 168;
+  const itemIds = useMemo(() => {
+    const occurrences = new Map<number, number>();
+    return values.map((value) => {
+      const occurrence = occurrences.get(value) ?? 0;
+      occurrences.set(value, occurrence + 1);
+      return `${value}:${occurrence}`;
+    });
+  }, [values]);
+  const itemRefs = useRef(new Map<string, HTMLLIElement>());
+  const previousRects = useRef(new Map<string, DOMRect>());
+  const animations = useRef(new Map<string, Animation>());
+
+  useLayoutEffect(() => {
+    const nextRects = new Map<string, DOMRect>();
+    itemRefs.current.forEach((element, id) => nextRects.set(id, element.getBoundingClientRect()));
+
+    if (motionMode === "full") {
+      nextRects.forEach((rect, id) => {
+        const previous = previousRects.current.get(id);
+        const element = itemRefs.current.get(id);
+        if (!previous || !element) return;
+        const deltaX = previous.left - rect.left;
+        const deltaY = previous.top - rect.top;
+        if (Math.abs(deltaX) < 0.5 && Math.abs(deltaY) < 0.5) return;
+
+        animations.current.get(id)?.cancel();
+        const animation = element.animate(
+          [{ transform: `translate(${deltaX}px, ${deltaY}px)` }, { transform: "translate(0, 0)" }],
+          { duration: 200, easing: "cubic-bezier(0.77, 0, 0.175, 1)" },
+        );
+        animations.current.set(id, animation);
+      });
+    } else {
+      animations.current.forEach((animation) => animation.cancel());
+      animations.current.clear();
+    }
+
+    previousRects.current = nextRects;
+  }, [itemIds, motionMode]);
 
   const barHeight = (v: number) => {
     if (allNonNegative) {
@@ -82,7 +124,12 @@ export function SortCanvas({ state }: Props) {
 
             return (
               <li
-                key={i}
+                key={itemIds[i]}
+                ref={(element) => {
+                  const id = itemIds[i]!;
+                  if (element) itemRefs.current.set(id, element);
+                  else itemRefs.current.delete(id);
+                }}
                 className="flex min-w-0 flex-1 max-w-18 flex-col items-center sm:max-w-16"
                 style={{ maxWidth: n > 10 ? 44 : n > 8 ? 52 : 64 }}
               >
@@ -100,11 +147,11 @@ export function SortCanvas({ state }: Props) {
                 <div
                   style={{ height: h }}
                   className={cn(
-                    "flex w-full items-end justify-center rounded-t-md border text-[11px] font-medium transition-colors duration-200 ease-out",
-                    "motion-reduce:transition-none",
+                    "viz-state-motion flex w-full items-end justify-center rounded-t-md border text-[11px] font-medium",
                     CELL_CLASS[cellState],
                     isActive && "shadow-sm",
                   )}
+                  data-cell-state={cellState}
                   aria-label={`Index ${i}, value ${value}, ${CELL_LABEL[cellState]}`}
                 >
                   <span aria-hidden className="pb-1 font-mono text-[10px] leading-none opacity-80">
@@ -171,11 +218,12 @@ export function SortCanvas({ state }: Props) {
                 <li key={i}>
                   <div
                     className={cn(
-                      "flex h-8 min-w-9 items-center justify-center rounded-md border px-2 font-mono text-xs transition-colors duration-200",
+                      "viz-state-motion flex h-8 min-w-9 items-center justify-center rounded-md border px-2 font-mono text-xs",
                       v === null
                         ? "border-dashed bg-transparent text-muted-foreground/40"
                         : CELL_CLASS[s],
                     )}
+                    data-cell-state={s}
                     aria-label={
                       v === null
                         ? `${auxiliary.label} ${i} empty`
@@ -198,12 +246,13 @@ export function SortCanvas({ state }: Props) {
 }
 
 function Legend({ states }: { states: CellState[] }) {
-  const shown = STATE_ORDER.filter((s) => states.includes(s));
-  if (shown.length <= 1) return null;
   return (
     <ul className="flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1.5 pt-3 text-[11px] text-muted-foreground">
-      {shown.map((s) => (
-        <li key={s} className="flex items-center gap-1.5">
+      {STATE_ORDER.map((s) => (
+        <li
+          key={s}
+          className={cn("flex items-center gap-1.5", !states.includes(s) && "opacity-35")}
+        >
           <span className={cn("h-2.5 w-2.5 rounded-sm border", CELL_CLASS[s])} aria-hidden />
           <span className="capitalize leading-none">{CELL_LABEL[s]}</span>
         </li>

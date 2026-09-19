@@ -26,11 +26,12 @@ export function QueueRow({ state }: { state: QueueVizState }) {
               <span className="font-mono text-[10px] text-muted-foreground">{i}</span>
               <div
                 className={cn(
-                  "flex h-12 w-14 items-center justify-center rounded-lg border font-mono text-sm transition-all duration-300",
+                  "viz-state-motion flex h-12 w-14 items-center justify-center rounded-lg border font-mono text-sm",
                   slot
                     ? CELL_CLASS[slot.state]
                     : "border-dashed border-border text-muted-foreground/60",
                 )}
+                data-cell-state={slot?.state ?? "default"}
                 aria-label={
                   slot
                     ? `Slot ${i}, value ${slot.value}, ${CELL_LABEL[slot.state]}`
