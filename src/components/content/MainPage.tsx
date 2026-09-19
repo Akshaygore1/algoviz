@@ -26,14 +26,15 @@ export function MainPage({ title, cards, breadcrumb = title }: MainPageProps) {
         </header>
 
         <div className="mt-10 grid max-w-3xl grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 md:grid-cols-3">
-          {cards.map((card) => {
+          {cards.map((card, index) => {
             return (
               <Link
                 key={card.href}
                 href={card.href}
-                className="group flex min-h-14 items-center py-3 outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+                className="main-page-card-reveal group flex min-h-14 items-center py-3 outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+                style={{ animationDelay: `${Math.min(index, 7) * 30}ms` }}
               >
-                <span className="text-[17px] font-semibold tracking-[-0.02em] text-foreground">
+                <span className="relative inline-block text-[17px] font-semibold tracking-[-0.02em] text-foreground after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-focus-visible:after:scale-x-100 motion-reduce:after:transition-none">
                   {card.title}
                 </span>
               </Link>
