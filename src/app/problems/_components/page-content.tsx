@@ -1,3 +1,5 @@
+"use client";
+
 import { MainPage, type MainPageCard } from "@/components/content/MainPage";
 
 export default ProblemsPage;

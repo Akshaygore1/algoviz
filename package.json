@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
-    "start": "next start -p 8080",
+    "start": "serve out -l 8080",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -73,6 +73,7 @@
     "eslint-plugin-prettier": "^5.2.6",
     "prettier": "^3.7.3",
     "react-grab": "^0.2.0",
+    "serve": "^14.2.6",
     "shiki": "^4.4.3",
     "typescript": "^5.8.3"
   }

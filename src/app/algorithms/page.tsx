@@ -1,4 +1,5 @@
 import { MainPage, type MainPageCard } from "@/components/content/MainPage";
+import { ClientOnly } from "@/components/ClientOnly";
 
 const TITLE = "Algorithms: DSA Visualizer";
 const DESCRIPTION =
@@ -50,5 +51,9 @@ const algorithms: MainPageCard[] = [
 ];
 
 export default function AlgorithmsPage() {
-  return <MainPage breadcrumb="Algorithms" title="Choose an algorithm" cards={algorithms} />;
+  return (
+    <ClientOnly>
+      <MainPage breadcrumb="Algorithms" title="Choose an algorithm" cards={algorithms} />
+    </ClientOnly>
+  );
 }

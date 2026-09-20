@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import HomeRedirect from "./_components/home-redirect";
 
 const TITLE = "Home: DSA Visualizer";
 const DESCRIPTION =
@@ -11,5 +11,5 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  redirect("/");
+  return <HomeRedirect />;
 }

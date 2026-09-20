@@ -1,3 +1,5 @@
+"use client";
+
 import { VisualizerPage } from "@/components/content/VisualizerPage";
 import { HashVisualizer } from "@/components/viz/HashVisualizer";
 

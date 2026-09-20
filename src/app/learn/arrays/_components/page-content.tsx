@@ -1,3 +1,5 @@
+"use client";
+
 import { ConceptPage } from "@/components/content/ConceptPage";
 import { BubbleSortVisualizer } from "@/components/viz/BubbleSortVisualizer";
 import { getConcept } from "@/data/concepts";

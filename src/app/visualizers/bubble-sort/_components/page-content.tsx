@@ -1,3 +1,5 @@
+"use client";
+
 import { VisualizerPage } from "@/components/content/VisualizerPage";
 import { BubbleSortVisualizer } from "@/components/viz/BubbleSortVisualizer";
 import { bubbleSort } from "@/lib/viz/algorithms/bubbleSort";

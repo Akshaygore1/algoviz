@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { ClientOnly } from "@/components/ClientOnly";
 import { ErrorView } from "./_components/error-view";
 
 export default function ErrorBoundary({
@@ -11,5 +12,9 @@ export default function ErrorBoundary({
   reset: () => void;
 }) {
   useEffect(() => console.error(error), [error]);
-  return <ErrorView onRetry={reset} />;
+  return (
+    <ClientOnly>
+      <ErrorView onRetry={reset} />
+    </ClientOnly>
+  );
 }

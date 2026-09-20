@@ -1,4 +1,5 @@
 import Content from "./_components/page-content";
+import { ClientOnly } from "@/components/ClientOnly";
 
 const TITLE = "Stack Interview Problems Visualized: 6 Problems Step by Step";
 const DESCRIPTION =
@@ -11,5 +12,9 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <Content />;
+  return (
+    <ClientOnly>
+      <Content />
+    </ClientOnly>
+  );
 }

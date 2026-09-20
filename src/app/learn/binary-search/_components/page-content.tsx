@@ -1,3 +1,5 @@
+"use client";
+
 import { ConceptPage } from "@/components/content/ConceptPage";
 import { BinarySearchVisualizer } from "@/components/viz/BinarySearchVisualizer";
 import { getConcept } from "@/data/concepts";

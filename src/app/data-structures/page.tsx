@@ -1,4 +1,5 @@
 import { MainPage, type MainPageCard } from "@/components/content/MainPage";
+import { ClientOnly } from "@/components/ClientOnly";
 
 const TITLE = "Data Structures: DSA Visualizer";
 const DESCRIPTION =
@@ -23,6 +24,12 @@ const dataStructures: MainPageCard[] = [
 
 export default function DataStructuresPage() {
   return (
-    <MainPage breadcrumb="Data Structures" title="Choose a data structure" cards={dataStructures} />
+    <ClientOnly>
+      <MainPage
+        breadcrumb="Data Structures"
+        title="Choose a data structure"
+        cards={dataStructures}
+      />
+    </ClientOnly>
   );
 }

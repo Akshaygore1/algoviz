@@ -1,4 +1,5 @@
 import { MainPage, type MainPageCard } from "@/components/content/MainPage";
+import { ClientOnly } from "@/components/ClientOnly";
 import { patterns } from "@/data/patterns";
 
 const TITLE = "DSA Interview Patterns: Recognise Before You Code";
@@ -18,10 +19,12 @@ const patternCards: MainPageCard[] = patterns.map((pattern) => ({
 
 export default function Page() {
   return (
-    <MainPage
-      breadcrumb="Interview prep / Patterns"
-      title="Choose a pattern"
-      cards={patternCards}
-    />
+    <ClientOnly>
+      <MainPage
+        breadcrumb="Interview prep / Patterns"
+        title="Choose a pattern"
+        cards={patternCards}
+      />
+    </ClientOnly>
   );
 }

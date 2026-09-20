@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { ClientOnly } from "@/components/ClientOnly";
 import { ErrorView } from "./_components/error-view";
 
 export default function GlobalError({
@@ -14,7 +15,9 @@ export default function GlobalError({
   return (
     <html lang="en">
       <body>
-        <ErrorView onRetry={reset} />
+        <ClientOnly>
+          <ErrorView onRetry={reset} />
+        </ClientOnly>
       </body>
     </html>
   );

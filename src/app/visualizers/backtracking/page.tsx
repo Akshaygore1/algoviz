@@ -1,4 +1,5 @@
 import Content from "./_components/page-content";
+import { ClientOnly } from "@/components/ClientOnly";
 
 const TITLE = "Backtracking Visualizer: Choose, Explore, Un-choose";
 const DESCRIPTION =
@@ -11,5 +12,9 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <Content />;
+  return (
+    <ClientOnly>
+      <Content />
+    </ClientOnly>
+  );
 }

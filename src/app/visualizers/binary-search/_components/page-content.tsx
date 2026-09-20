@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { VisualizerPage } from "@/components/content/VisualizerPage";
 import { BinarySearchVisualizer } from "@/components/viz/BinarySearchVisualizer";

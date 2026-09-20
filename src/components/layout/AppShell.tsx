@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { CircleDot } from "lucide-react";
+import { LogoMark } from "./LogoMark";
 import { ThemeToggle } from "./ThemeToggle";
 
 interface Props {
@@ -16,10 +16,10 @@ export function AppShell({ children }: Props) {
         <div className="mx-auto flex h-16 w-full max-w-5xl items-center px-5 sm:px-8 lg:px-10">
           <Link
             href="/home"
-            className="flex items-center gap-1.5 rounded-sm text-sm font-semibold tracking-[-0.02em] outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+            className="flex items-center gap-2 rounded-sm text-sm font-semibold tracking-[-0.02em] outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
             aria-label="AlgoViz home"
           >
-            <CircleDot aria-hidden="true" className="size-4 stroke-[1.8]" />
+            <LogoMark className="size-5 shrink-0" />
             <span>algoviz</span>
           </Link>
 

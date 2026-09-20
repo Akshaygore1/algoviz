@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   formatDetection: { email: false, address: false, telephone: false },
   openGraph: { type: "website" },
   twitter: { card: "summary_large_image" },
-  icons: { icon: "/favicon.ico" },
+  icons: { icon: [{ url: "/icon.svg", type: "image/svg+xml" }] },
 };
 
 const themeBootstrap = `(function(){try{var s=localStorage.getItem("dsa-visualizer:theme");var d=s?s==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;if(d)document.documentElement.classList.add("dark");}catch(e){}})();`;

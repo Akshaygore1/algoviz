@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageBreadcrumb } from "@/components/layout/PageBreadcrumb";

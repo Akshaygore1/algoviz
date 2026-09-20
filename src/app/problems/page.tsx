@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProblemsPage from "./_components/page-content";
+import { ClientOnly } from "@/components/ClientOnly";
 
 const title = "Interview Problems: Curated DSA Question Set";
 const description =
@@ -7,5 +8,9 @@ const description =
 export const metadata: Metadata = { title, description, openGraph: { title, description } };
 
 export default function Page() {
-  return <ProblemsPage />;
+  return (
+    <ClientOnly>
+      <ProblemsPage />
+    </ClientOnly>
+  );
 }

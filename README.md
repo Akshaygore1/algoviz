@@ -22,16 +22,20 @@ bun run typecheck
 bun run build
 ```
 
-Run the production server locally after building:
+Build and serve the static production output locally:
 
 ```sh
 bun run start
 ```
 
+The production build is written to `out/`. It can be deployed to any static host; no Next.js
+server is required.
+
 ## Project structure
 
-- `src/app/` contains App Router routes, metadata, and global styles. Keep `page.tsx` files as
-  Server Components unless browser-only behavior is required.
+- `src/app/` contains App Router routes, metadata, and global styles. Route wrappers retain
+  build-time metadata and static route generation, while visible page content is mounted through
+  `ClientOnly` and rendered in the browser.
 - `src/app/**/_components/` contains UI that belongs to a single route. The underscore keeps
   these folders out of the routing tree.
 - `src/components/layout/` contains the application shell, navigation, and theme controls.
@@ -43,8 +47,8 @@ bun run start
 
 ## Deployment
 
-Import the repository into Vercel. Vercel detects Next.js automatically and
-uses the Bun lockfile and `bun run build`; no adapter or worker configuration is required.
+Run `bun run build` and deploy the generated `out/` directory. Vercel can detect and deploy the
+static export automatically; other static hosts should use `out/` as their publish directory.
 
 ## Built with
 
