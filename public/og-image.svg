@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <title>DSA Visualizer</title>
+  <desc>Learn algorithms visually. A minimal illustration of five ascending sorting bars.</desc>
+  <rect width="1200" height="630" fill="#e9edf2" />
+
+  <g transform="translate(76 72) scale(1.5)">
+    <rect width="32" height="32" rx="6" fill="#101010" />
+    <g transform="translate(4 4)" stroke="#f5f5f5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 21v-4.25M7.5 21v-6.5M12 21V11.75M16.5 21V8M21 21V5" />
+      <path d="m2.5 14.5 4.75-1.75L12 9.25l4.25-4L21 1.75" />
+    </g>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="72" y="277" fill="#101010" font-size="88" font-weight="700" letter-spacing="-4">DSA</text>
+    <text x="72" y="373" fill="#101010" font-size="88" font-weight="700" letter-spacing="-4">Visualizer</text>
+    <text x="76" y="431" fill="#596575" font-size="28" letter-spacing="-0.5">Learn algorithms visually.</text>
+    <text x="76" y="558" fill="#596575" font-size="20">algoviz1.vercel.app</text>
+  </g>
+
+  <g>
+    <rect x="744" y="353" width="56" height="48" rx="4" fill="#c5ced9" />
+    <rect x="820" y="309" width="56" height="92" rx="4" fill="#aeb9c7" />
+    <rect x="896" y="265" width="56" height="136" rx="4" fill="#8996a7" />
+    <rect x="972" y="221" width="56" height="180" rx="4" fill="#596575" />
+    <rect x="1048" y="177" width="56" height="224" rx="4" fill="#101010" />
+  </g>
+</svg>

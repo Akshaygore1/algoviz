@@ -8,7 +8,6 @@ const DESCRIPTION =
 export const metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  openGraph: { title: TITLE, description: DESCRIPTION },
 };
 
 const dataStructures: MainPageCard[] = [

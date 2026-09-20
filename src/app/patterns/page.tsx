@@ -9,7 +9,6 @@ const DESCRIPTION =
 export const metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  openGraph: { title: TITLE, description: DESCRIPTION },
 };
 
 const patternCards: MainPageCard[] = patterns.map((pattern) => ({

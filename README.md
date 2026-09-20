@@ -50,6 +50,18 @@ server is required.
 Run `bun run build` and deploy the generated `out/` directory. Vercel can detect and deploy the
 static export automatically; other static hosts should use `out/` as their publish directory.
 
+## Social preview image
+
+The shared 1200 × 630 preview is `src/app/opengraph-image.png`, with its editable source in
+`public/og-image.svg`. After editing the SVG, regenerate the PNG:
+
+```sh
+node --input-type=module -e "import sharp from 'sharp'; await sharp('public/og-image.svg').png().toFile('src/app/opengraph-image.png');"
+```
+
+The root layout sets the production domain to `https://algoviz1.vercel.app`. Pages inherit the
+shared image and use their own title and description for Open Graph and Twitter previews.
+
 ## Built with
 
 - Next.js App Router

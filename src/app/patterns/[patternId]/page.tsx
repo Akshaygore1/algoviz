@@ -19,7 +19,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${pattern.name}: DSA Interview Pattern`,
     description: pattern.summary,
-    openGraph: { title: `${pattern.name}: DSA Interview Pattern`, description: pattern.summary },
   };
 }
 

@@ -1,0 +1,1 @@
+DSA Visualizer — Learn algorithms visually. Five ascending sorting bars on a light background.

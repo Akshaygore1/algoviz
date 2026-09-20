@@ -8,6 +8,7 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://algoviz1.vercel.app"),
   title: "DSA Visualizer: Learn algorithms visually",
   applicationName: "DSA Visualizer",
   description:
