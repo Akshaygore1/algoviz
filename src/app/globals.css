@@ -168,6 +168,11 @@
 @layer base {
   * {
     border-color: var(--color-border);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
   }
   body {
     background-color: var(--color-background);
